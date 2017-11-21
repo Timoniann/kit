@@ -40,7 +40,6 @@
 			return self::$db ? self::$db : self::$db = new Database(self::get('db.host'), self::get('db.login'), self::get('db.password'), self::get("db.name"));
 		}
 
-
 		public static function init()
 		{
 			$lines = file(dirname(__FILE__) ."/config.ini", FILE_IGNORE_NEW_LINES);

@@ -13,7 +13,7 @@
 		} elseif (file_exists($model_path)) {
 			require_once $model_path;
 		} else{
-			throw new Exception("Failed to include class :" . $class_name.". Path: ".$model_path);
+			throw new Exception("Failed to include class :" . $class_name.". Path: ".$controllers_path);
 		}
 	}
 

@@ -2,10 +2,9 @@
 
 class Model
 {
-	protected $db;
-	protected $table_name;
+	protected $db, $table_name;
 
-	function __construct($db = null, $table_name = null)
+	function __construct($table_name = null, $db = null)
 	{
 		$this->db = $db ? $db : Config::getDatabase();
 		$this->table_name = $table_name ? $table_name : strtolower(get_class($this));
@@ -26,6 +25,7 @@ class Model
 	{
 		$id = (int)$id;
 		$sql = "DELETE FROM $table_name WHERE id=$id";
+		return $this->db->query($sql);
 	}
 
 	public function getAll()

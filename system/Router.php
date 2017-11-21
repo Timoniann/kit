@@ -21,14 +21,14 @@
 					$this->route = strtolower($path_parts[$current++]);
 					$this->method_prefix = isset($routes[$this->route]) ? $routes[$this->route] : "";
 				}
-				if (isset($path_parts[$current])) {
+				print_r($path_parts);
+				if (isset($path_parts[$current]) && $path_parts[$current]) {
 					$this->controller = strtolower($path_parts[$current++]);
 				}
-				if(isset($path_parts[$current])){
-					
+				if(isset($path_parts[$current]) && $path_parts[$current]){
 					$this->action = strtolower($path_parts[$current++]);
 				}
-
+				
 				$this->params = $path_parts;
 			}
 		}
@@ -56,6 +56,11 @@
 		public function getMethodPrefix()
 		{
 			return $this->method_prefix;
+		}
+
+		public function getUri()
+		{
+			return $this->uri;
 		}
 	}
 

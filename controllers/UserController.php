@@ -14,6 +14,11 @@ class UserController extends Controller
 		$this->data["users"] = $this->user_model->getAll();
 	}
 
+	public function index()
+	{
+		
+	}
+
 }
 
 ?>
