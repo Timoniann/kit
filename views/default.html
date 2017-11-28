@@ -1,19 +1,36 @@
 <!DOCTYPE html>
 <html>
 <head>
+	<script src="/js/jquery.js"></script>
+	<script src="/js/bootstrap.js"></script>
+	<link rel="stylesheet" href="/css/bootstrap.css">
 	<title><?=Config::get("site_name")?></title>
 </head>
 <body>
 
 	This is default layout<br>
 
-	<!-- Example loading pictures  -->
-	<img width="50" src="/images/avatar.png">
-	
+	<div class="container">
 
-	<!-- Content page -->
-	<?=$data['content']?>
+	<?php
+	Session::setFlash("Hello, this is flash", "red");
+	?>
 
+		<?php if(Session::hasFlash()) { ?>
+
+			<div class="alert alert-info  alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+			  		<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
+				<?php Session::showFlash(); } ?>
+			</div>
+
+		<!-- Example loading pictures  -->
+		<img width="50" src="/images/avatar.png">
+		
+
+		<!-- Content page -->
+		<?=$data['content']?>
+	</div>
 	<footer>
 		PI, 4 course :)
 	</footer>
