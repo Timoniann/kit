@@ -1,0 +1,9 @@
+<a href="/books/create">Create book</a><br>
+
+<?php
+
+foreach ($data['books'] as $book) {
+	echo "<a href='/books/view/" . $book['id'] . "'>" . $book['title'] . "</a><br>";
+}
+
+?>

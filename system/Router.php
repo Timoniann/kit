@@ -27,8 +27,10 @@
 				if(isset($path_parts[$current]) && $path_parts[$current]){
 					$this->action = strtolower($path_parts[$current++]);
 				}
+				if (isset($path_parts[$current])) {
+					$this->params = array_slice($path_parts, $current);
+				}
 				
-				$this->params = $path_parts;
 			}
 		}
 

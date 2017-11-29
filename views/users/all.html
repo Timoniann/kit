@@ -5,7 +5,7 @@ Users: <br>
 <?php
 
 	foreach ($data['users'] as $user) {
-		echo $user['first_name'] . " " . $user['last_name'] . "<br>";
+		echo "<a href='/users/view/" . $user['id'] . "'>" . $user['first_name'] . " " . $user['last_name'] . "</a><br>";
 	}
 
 ?>

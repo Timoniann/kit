@@ -1,0 +1,9 @@
+<a href="/subjects/create">Create subject</a><br><br>
+
+<?php
+
+	for ($i=0; $i < count($data); $i++) { 
+		echo "<a href='/subjects/view/" . $data[$i]['id'] . "'>" . $data[$i]["name"] . "</a><br>";
+	}
+
+?>

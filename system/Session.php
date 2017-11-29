@@ -58,7 +58,10 @@ class Session
 		$user_id = self::get("user_id");
 		if ($user_id == null) return null;
 		$users_model = new Users();
-		return $users_model->getById($user_id);
+		$user = $users_model->getById($user_id);
+		if(count($user))
+			return $user[0];
+		return null;
 	}
 
 
