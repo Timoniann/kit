@@ -1,1 +1,2 @@
-# KIT
+# KIT - information site
+
