@@ -2,16 +2,16 @@
 
 class UsersController extends Controller
 {
-	private $user_model;
+	private $table;
 
 	public function init()
 	{
-		$this->user_model = new Users();
+		$this->table = new Users();
 	}
 
 	public function all()
 	{
-		$this->data["users"] = $this->user_model->getAll();
+		$this->data["users"] = $this->table->getAll();
 	}
 
 	public function index()
@@ -44,7 +44,7 @@ class UsersController extends Controller
 		}
 
 
-		$this->user_model->add($email, md5($password), $first_name, $last_name);
+		$this->table->add($email, md5($password), $first_name, $last_name);
 
 		Session::setFlash("Good");
 		header("Location: /users/index");
@@ -64,7 +64,7 @@ class UsersController extends Controller
 		$password = $_POST['password'];
 		$password = md5($password);
 
-		$user = $this->user_model->getByEmailAndPassword($email, $password);
+		$user = $this->table->getByEmailAndPassword($email, $password);
 		if (!$user || !count($user)) {
 			Session::setFlash("Wrong email or password");
 			Router::redirectToBack();
@@ -78,6 +78,13 @@ class UsersController extends Controller
 	{
 		session_destroy();
 		Router::redirect("/users/auth");
+	}
+
+	public function view()
+	{
+		if (count($this->params)) {
+    		$this->data['user'] = $this->table->getById((int)$this->params[0])[0];
+    	}
 	}
 
 }
