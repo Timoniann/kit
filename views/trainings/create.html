@@ -1,0 +1,20 @@
+Creating training
+<form method="POST">
+	Training name: <br>
+	<input type="text" name="training_name" minlength="2"> <br>
+	Training type: <br>
+	<input type="radio" name="training_type" value="0" checked="true">Public <br>
+	<input type="radio" name="training_type"  value="1">Private <br>
+	Subject: <br>
+	<select name="subject">
+		<option value="0" >No subject</option>
+		<?php
+		
+			foreach ($data["subjects"] as $subject) {
+				echo "<option value='" . $subject['id'] . "'>" . $subject['name'] . "</option>";
+			}
+		?>
+	</select><br>
+	<button type="submit">Create</button>
+	
+</form>

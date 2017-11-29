@@ -1,0 +1,14 @@
+<?php
+
+	echo "Training: <h2>" . $data['training']['name'] . "</h2>";
+	echo "Access: <h3>" . ($data['training']['private'] ? "Private" : "Public") . "</h3>";
+	echo "Author: <h4> <a href='/users/view/" . $data['user']["id"] . "'>" . $data['user']['first_name'] . " " . $data['user']['last_name'] . "</a></h4>";
+
+	echo "<a href='/lections/create/" . $data['training']['id'] . "'>Add lection</a>";
+
+	echo "<h4>Lections:</h4>";
+	foreach ($data['lections'] as $lection) {
+		echo "<a href='/lections/view/" . $lection['id'] . "'>" . $lection['title'] . "</a>";
+		echo "<br>";
+	}
+?>
