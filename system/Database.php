@@ -16,6 +16,10 @@ class Database
 		if ($this->connection == null) {
 			exit();
 		}
+		if ($this->connection->set_charset("utf8")) {
+			printf("Error loading character set utf8: %s\n", $this->connection->error);
+		}
+
 		if (mysqli_connect_error()) {
 			throw new Exception("Could not connect to Database");
 		}
