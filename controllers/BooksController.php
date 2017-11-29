@@ -23,7 +23,8 @@ class BooksController extends Controller
 			if (move_uploaded_file($_FILES['book_file']['tmp_name'], $uploadfile)) {
 			    //echo "Файл корректен и был успешно загружен.\n";
 			} else {
-			    echo "Возможная атака с помощью файловой загрузки!\n";
+				Session::setFlash("Book is not uploaded");
+			    return;
 			}
 
 			$title = $_POST['book_title'];
