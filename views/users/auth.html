@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-md-4">
+        <div class="loginform">
+            <form method="post" action="login">
+                <legend>Auth</legend>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input">
+                        Check me out
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign in</button>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="regform">
+            <form method="post" action="/users/registration">
+                <legend>Registration</legend>
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+                    <small id="emailHelp" class="form-text text-muted">Введіть вірний email.</small>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Repeat password" name="repeat_password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First name" name="first_name" minlength="2" required>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last name" name="last_name" minlength="2" required>
+                </div>
+                <div class="form-check">
+                    <label class="form-check-label">
+                        <input type="checkbox" class="form-check-input" required>
+                        Я згоден з правилами сайту!
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary">Registrate</button>
+            </form>
+        </div>
+    </div>
+</div>

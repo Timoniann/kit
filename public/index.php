@@ -7,6 +7,9 @@
 	require_once SYSTEM . "/init.php";
 
 	Config::init();
+
+	session_start();
+
 	App::run($_SERVER['REQUEST_URI']);
 
 ?>

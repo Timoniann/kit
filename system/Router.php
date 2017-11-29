@@ -21,7 +21,6 @@
 					$this->route = strtolower($path_parts[$current++]);
 					$this->method_prefix = isset($routes[$this->route]) ? $routes[$this->route] : "";
 				}
-				print_r($path_parts);
 				if (isset($path_parts[$current]) && $path_parts[$current]) {
 					$this->controller = strtolower($path_parts[$current++]);
 				}
@@ -61,6 +60,16 @@
 		public function getUri()
 		{
 			return $this->uri;
+		}
+
+		public static function redirectToBack()
+		{
+			header('Location: ' . $_SERVER['HTTP_REFERER']);
+		}
+
+		public static function redirect($path)
+		{
+			header("Location: $path");
 		}
 	}
 

@@ -17,14 +17,14 @@ class Model
 
 	public function getById($id)
 	{
-		$sql = "SELECT * FROM $table_name WHERE id=$id";
+		$sql = "SELECT * FROM $this->table_name WHERE id=$id";
 		return $this->db->query($sql);
 	}
 
 	public function deleteById($id)
 	{
 		$id = (int)$id;
-		$sql = "DELETE FROM $table_name WHERE id=$id";
+		$sql = "DELETE FROM $this->table_name WHERE id=$id";
 		return $this->db->query($sql);
 	}
 
