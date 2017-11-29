@@ -1,0 +1,30 @@
+<div class="col-md-11">
+	<div class="regform">
+		<form method="POST" enctype="multipart/form-data">
+			<legend>Add book</legend>
+			<div class="form-group">
+				<label for="bookname">Book`s name</label>
+				<input type="text" class="form-control" id="bookname" aria-describedby="bookHelp" placeholder="Enter book`s name" name="book_title" minlength="2" required>
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input type="text" class="form-control" id="description" placeholder="description" name="book_description" minlength="2" required>
+			</div>
+			<div class="form-group">
+				<label for="author">Author`s name</label>
+				<input type="text" class="form-control" id="author" placeholder="Author`s name" name="book_author" minlength="2" required>
+			</div>
+			<div class="form-group">
+				<label for="file">Upload your book</label>
+				<input type="file" class="form-control" id="file" accept=".pdf" size="15" name="book_file" required>
+			</div>
+			<label for="dob" >Date of Release</label>
+			<div class="form-group">
+				<input type="date" class="form-control" id="dob" placeholder="mm/dd/yyyy" name="book_release_date" required>
+			</div>
+			<div class="text-right">
+				<button type="submit" class="btn btn-primary" >Upload</button>
+			</div>
+		</form>
+	</div>
+</div>

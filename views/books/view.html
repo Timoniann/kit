@@ -1,0 +1,11 @@
+<?php
+
+	echo "<h2>" . $data['book']['title'] . "</h2>";
+	echo "Release date: <h3>" . $data['book']['release_date'] . "</h3><br>";
+	echo "<div>" . $data['book']['description'] . "</div><br><br>";
+
+?>
+
+<object data="/uploads/books/<?=$data['book']['file_name'] ?>" type="application/pdf" width="1000px" height="900px">
+	<p>Alternative text - include a link <a href="/uploads/books/<?=$data['book']['file_name'] ?>">to the PDF!</a></p>
+</object>
