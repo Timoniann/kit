@@ -16,7 +16,10 @@ class UsersController extends Controller
 
 	public function index()
 	{
-
+		$user = Session::getCurrentUser();
+		if ($user == null) {
+			Router::redirect("/users/auth");
+		}
 	}
 
 	public function registration()
@@ -62,13 +65,19 @@ class UsersController extends Controller
 		$password = md5($password);
 
 		$user = $this->user_model->getByEmailAndPassword($email, $password);
-		if (!$user) {
+		if (!$user || !count($user)) {
 			Session::setFlash("Wrong email or password");
 			Router::redirectToBack();
+			return;
 		}
-		
-		Session::set("user_id", $user['id']);
+		Session::set("user_id", "" + $user[0]['id']);
 		Router::redirect('/users/index');
+	}
+
+	public function logout()
+	{
+		session_destroy();
+		Router::redirect("/users/auth");
 	}
 
 }

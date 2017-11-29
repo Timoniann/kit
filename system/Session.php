@@ -29,29 +29,37 @@ class Session
 		self::delete("message");
 	}
 
-		public static function set($key, $value)
-		{
-			$_SESSION[$key] = $value;
-		}
+	public static function set($key, $value)
+	{
+		$_SESSION[$key] = $value;
+	}
 
-		public static function get($key)
-		{
-			if (isset($_SESSION[$key])) {
-				return $_SESSION[$key];
-			} else return null;
+	public static function get($key)
+	{
+		if (isset($_SESSION[$key])) {
+			return $_SESSION[$key];
+		} else return null;
+	}
+	
+	public static function delete($key)
+	{
+		if (isset($_SESSION[$key])) {
+			unset($_SESSION[$key]);
 		}
-		
-		public static function delete($key)
-		{
-			if (isset($_SESSION[$key])) {
-				unset($_SESSION[$key]);
-			}
-		}
+	}
 
-		public static function destroy()
-		{
-			session_destroy();
-		}
+	public static function destroy()
+	{
+		session_destroy();
+	}
+
+	public static function getCurrentUser()
+	{
+		$user_id = self::get("user_id");
+		if ($user_id == null) return null;
+		$users_model = new Users();
+		return $users_model->getById($user_id);
+	}
 
 
 }

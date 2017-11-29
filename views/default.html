@@ -2,62 +2,89 @@
 <html lang="ua">
 <head>
 	<meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Timoniann">
-    <link rel="icon" href="favicon.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="">
+	<meta name="author" content="Timoniann">
+	<link rel="icon" href="favicon.ico">
 
-    <title><?=Config::get("site_name")?></title>
+	<title><?=Config::get("site_name")?></title>
 
-    <link href="/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/css/style.css" rel="stylesheet">
+	<link href="/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/style.css" rel="stylesheet">
 
 </head>
 <body>
 
 	<!-- Header -->
 	<div class="header">
-  	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-      	<a class="navbar-brand" href="/"><?=Config::get("site_name")?></a>
-        	<ul class="navbar-nav mr-auto">
-          	<li class="nav-item active">
-            		<a class="nav-link" href="/">Home</a>
-              <li class="nav-item">
-            		<a class="nav-link" href="/users/auth">Log in</a>
-              </li>
-              <li class="nav-item">
-            		<a class="nav-link" href="/contacts">Contacts</a>
-          	</li>
-        	</ul>
-    	</nav>
-  	</div>
+	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="/"><?=Config::get("site_name")?></a>
+			<ul class="navbar-nav mr-auto">
+			<li class="nav-item active">
+				<a class="nav-link" href="/">Home</a>
+			</li>
 
-  	<div class="main">
-  		<div class="container">
+			<?php
+				$user = Session::getCurrentUser();
+				if($user){
 
-  			<?php if(Session::hasFlash()) { ?>
+					?>
 
-  				<div class="alert alert-info  alert-dismissible" role="alert">
-  					<button type="button" class="close" data-dismiss="alert">&times;</button>
-  				  		<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
-  					<?php Session::showFlash(); ?>
-          </div>
+						<li class="nav-item">
+							<a class="nav-link" href="/users">Profile</a>
+						</li>
 
-        <?php } ?>
+						<li class="nav-item">
+							<a class="nav-link" href="/users/logout">Logout</a>
+						</li>
 
-  			<!-- Example loading pictures  -->
-  			<!-- <img width="50" src="/images/avatar.png"> -->
-  			
+					<?php
 
-  			<!-- Content page -->
-  			<?=$data['content']?>
-  		</div>
-  	</div>
-  	<footer class="footer">
-      <div class="container">
-        <span class="text-muted"><p>&copy; PI, 4 course :)</p></span>
-      </div>
-  	</footer>
+				} else {
+					?>
+
+						<li class="nav-item">
+							<a class="nav-link" href="/users/auth">Log in</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/contacts">Contacts</a>
+						</li>
+						
+					<?php
+				}
+			?>
+
+			
+			</ul>
+		</nav>
+	</div>
+
+	<div class="main">
+		<div class="container">
+
+			<?php if(Session::hasFlash()) { ?>
+
+				<div class="alert alert-info  alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert">&times;</button>
+						<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
+					<?php Session::showFlash(); ?>
+		  </div>
+
+		<?php } ?>
+
+			<!-- Example loading pictures  -->
+			<!-- <img width="50" src="/images/avatar.png"> -->
+			
+
+			<!-- Content page -->
+			<?=$data['content']?>
+		</div>
+	</div>
+	<footer class="footer">
+	  <div class="container">
+		<span class="text-muted"><p>&copy; PI, 4 course :)</p></span>
+	  </div>
+	</footer>
 
 </body>
 </html>
