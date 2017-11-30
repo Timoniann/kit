@@ -2,7 +2,7 @@
 <html lang="ua">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="Timoniann">
 	<link rel="icon" href="favicon.ico">
@@ -19,64 +19,68 @@
 	<div class="header">
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="/"><?=Config::get("site_name")?></a>
-			<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="/">Home</a>
-			</li>
+			 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			    <span class="navbar-toggler-icon"></span>
+			</button>
 
-			<?php
-				$user = Session::getCurrentUser();
-				if($user){
-
-					?>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/profile">Profile</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/news">News</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users/all">All users</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/books">Books</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/subjects">Subjects</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/trainings">Trainings</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users/logout">Logout</a>
-						</li>
-
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active">
+						<a class="nav-link" href="/">Home</a>
+					</li>
 
 					<?php
+						$user = Session::getCurrentUser();
+						if($user){
 
-				} else {
+							?>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/profile">Profile</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/news">News</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/users/all">All users</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/books">Books</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/subjects">Subjects</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/trainings">Trainings</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/users/logout">Logout</a>
+								</li>
+
+
+							<?php
+
+						} else {
+							?>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/users/auth">Log in</a>
+								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="/contacts">Contacts</a>
+								</li>
+								
+							<?php
+						}
 					?>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users/auth">Log in</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/contacts">Contacts</a>
-						</li>
-						
-					<?php
-				}
-			?>
-
-			
-			</ul>
+				</ul>
+			</div>
 		</nav>
 	</div>
 
@@ -100,7 +104,8 @@
 		<span class="text-muted"><p>&copy; PI, 4 course :)</p></span>
 	  </div>
 	</footer>
-	<script src="/js/jquery.js"></script>
-	<script src="/js/bootstrap.bundle.js"></script>
+	<script src="/js/tether.min.js"></script>
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
