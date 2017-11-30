@@ -28,7 +28,7 @@ class Database
 	public function query($sql)
 	{
 		if (!$this->connection) return false;
-
+		
 		$result = $this->connection->query($sql);
 		if ($this->error()) throw new Exception($this->connection);
 		if (is_bool($result)) return $result;
