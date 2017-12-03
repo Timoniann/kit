@@ -4,12 +4,24 @@ class ProfileController extends Controller
 {
 	public function init()
 	{
-		
+		if(!Session::getCurrentUser())
+			Router::redirect("/users/auth");
 	}
 
 	public function index()
 	{
-		$this->data['user'] = Session::getCurrentUser();
+		$user = Session::getCurrentUser();
+		$this->data['user'] = $user;
+		$trainings_table = new Trainings();
+		$entries_table = new Entries();
+		$entries = $entries_table->getByUserId($user['id']);
+
+		$trainings = array();
+		foreach ($entries as $entry) {
+			array_push($trainings, $trainings_table->getById($entry['training_id'])[0]);
+			$trainings[count($trainings) - 1]['progress'] = $entry['progress'];
+		}
+		$this->data['trainings'] = $trainings;
 	}
 
 	public function edit()

@@ -1,9 +1,26 @@
 <a href="/trainings/create">Create training</a><br><br>
 
-<?php
+<table>
+	<thead>
+		<tr>
+			<td>Дисципліна</td>
+			<td>Назва курсу</td>
+			<td>Викладач</td>
+			<td>Тривалість курсу</td>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+			foreach ($data['trainings'] as $training) {
+				echo "<tr>";
+					echo "<td><a href='/subjects/view/" . $training['subject_id'] . "'>" . $training['subject_name'] . "</a></td>";
+					echo "<td><a href='/trainings/view/" . $training['id'] . "'>" . $training["name"] . "</a></td>";
+					echo "<td><a href='/users/view/" . $training['user_id'] . "'>" . $training['user_name'] . "</a></td>";
+					echo $training['in_progress'] ? "<td><a href='/trainings/study/{$training['id']}'><button>Продовжити навчання</button></a><br><td>" : "<td><a href='/trainings/entry/{$training['id']}'><button>Записатися</button></a><br><td>";
 
-	for ($i=0; $i < count($data); $i++) { 
-		echo "<a href='/trainings/view/" . $data[$i]['id'] . "'>" . $data[$i]["name"] . "</a><br>";
-	}
+				echo "</tr>";
+			}
+		?>
+	</tbody>
 
-?>
+</table>

@@ -11,4 +11,10 @@
 	echo "Workplace: <h5>" . $data['user']['workplace'] . "</h5><br>";
 	echo "Registration date: <h5>" . $data['user']['registration_date'] . "</h5><br>";
 
+	echo "Trainings: <br>";
+	foreach ($data['trainings'] as $training) {
+		echo "<a href='/trainings/view/{$training['id']}'>{$training['name']}</a> ";
+		echo "Progress: " . $training['progress'];
+		echo " <a href='/trainings/study/{$training['id']}'><button>Study</button></a><br>";
+	}
 ?>
