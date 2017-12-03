@@ -1,14 +1,14 @@
 <h2> News </h2>
 
-<div class="row">
+<div class="container">
 
 <a href="/news/create">Create news</a><br><br>
-
+<div class="row">
 <?php 
 	foreach ($data['news'] as $post) {
 		?>
 
-		<div class="col-md-4">
+		<div class="col-md-3">
 			<div class="news">
 				<div class="ntitle">
 					<h2><?=$post['title'] ?></h2>
@@ -22,6 +22,7 @@
 			</div>
 		</div>
 		<?php } ?>
+</div>
 </div>
 <div class="row">
 	<div class="col-md-12">
