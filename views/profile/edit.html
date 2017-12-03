@@ -72,6 +72,19 @@
 
             <form method="post" action="">
                 <div class="form-group">
+                    <label for="InputWorkplace">Workplace</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="InputWorkplace" placeholder="Enter your workplace" name="workplace" value="<?=$data['user']['workplace']; ?>">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+            <form method="post" action="">
+                <div class="form-group">
                     <label for="InputAbout">About</label>
                     <div class="input-group">
                         <textarea rows="7" class="form-control" id="InputAbout" placeholder="Example: Last time I live in..." name="about"><?=$data['user']['about']; ?></textarea>

@@ -10,10 +10,13 @@ class ProfileController extends Controller
 
 	public function index()
 	{
+		$trainings_table = new Trainings();
+		$books_table = new Books();
+		$entries_table = new Entries();
+
 		$user = Session::getCurrentUser();
 		$this->data['user'] = $user;
-		$trainings_table = new Trainings();
-		$entries_table = new Entries();
+		
 		$entries = $entries_table->getByUserId($user['id']);
 
 		$trainings = array();
@@ -22,6 +25,9 @@ class ProfileController extends Controller
 			$trainings[count($trainings) - 1]['progress'] = $entry['progress'];
 		}
 		$this->data['trainings'] = $trainings;
+
+		$this->data['books'] = $books_table->get(array('user_id' => $user['id']));
+
 	}
 
 	public function edit()
@@ -70,6 +76,14 @@ class ProfileController extends Controller
 					Session::setFlash("City edited");
 				} else {
 					Session::setFlash("City not edited");
+				}
+			}
+			if (isset($_POST['workplace'])) {
+				$workplace = $_POST['workplace'];
+				if($user_table->update($current_user["id"], array('workplace' => $workplace))){
+					Session::setFlash("Workplace edited");
+				} else {
+					Session::setFlash("Workplace not edited");
 				}
 			}
 			if (isset($_POST['about'])) {

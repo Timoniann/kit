@@ -57,6 +57,13 @@
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
 
+.shadowbox{
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+
 /* testingroom */
 .menutest{
 margin-top:20px;

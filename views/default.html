@@ -9,7 +9,6 @@
 
 	<title><?=Config::get("site_name")?></title>
 
-<!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> -->
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
 
 	<link href="/css/style.css" rel="stylesheet">
@@ -27,7 +26,7 @@
 
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active">
+					<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
 						<a class="nav-link" href="/">Home</a>
 					</li>
 
@@ -37,54 +36,63 @@
 
 							?>
 
-								<li class="nav-item">
-									<a class="nav-link" href="/profile">Profile</a>
-								</li>
-
-								<li class="nav-item">
+								<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
 									<a class="nav-link" href="/news">News</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="/users/all">All users</a>
+									<a class="nav-link <?= App::getRouter()->getController() == "users" ? "active" : "" ?>" href="/users/all">Users</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="/books">Books</a>
+									<a class="nav-link <?= App::getRouter()->getController() == "books" ? "active" : "" ?>" href="/books">Books</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="/library">Library</a>
+									<a class="nav-link <?= App::getRouter()->getController() == "library" ? "active" : "" ?>" href="/library">Library</a>
 								</li>
 
-								<li class="nav-item">
+								<li class="nav-item <?= App::getRouter()->getController() == "subjects" ? "active" : "" ?>">
 									<a class="nav-link" href="/subjects">Subjects</a>
 								</li>
 
-								<li class="nav-item">
+								<li class="nav-item <?= App::getRouter()->getController() == "trainings" ? "active" : "" ?>">
 									<a class="nav-link" href="/trainings">Trainings</a>
 								</li>
-
-								<li class="nav-item">
-									<a class="nav-link" href="/users/logout">Logout</a>
-								</li>
-
-
-
 							<?php
 
 						} else {
 							?>
 
 								<li class="nav-item">
-									<a class="nav-link" href="/users/auth">Log in</a>
-								</li>
-								<li class="nav-item">
 									<a class="nav-link" href="/contacts">Contacts</a>
 								</li>
 								
 							<?php
 						}
+					?>
+				</ul>
+				<ul class="navbar-nav">
+					<?php
+						if($user){ ?>
+
+							<li class="nav-item align-right <?= App::getRouter()->getController() == "profile" ? "active" : "" ?>">
+								<a class="nav-link" href="/profile">Profile</a>
+							</li>
+
+			
+							<li class="nav-item float-right">
+								<a class="nav-link" href="/users/logout">Logout</a>
+							</li>
+
+						<?php }
+						else { ?>
+
+							<li class="nav-item">
+								<a class="nav-link" href="/users/auth">Log in</a>
+							</li>
+
+						<?php }
 					?>
 				</ul>
 			</div>
@@ -100,10 +108,12 @@
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
 					<?php Session::showFlash(); ?>
-		  </div>
+		  		</div>
+	
+			<?php } ?>
 
-		<?php } ?>
 			<?=$data['content']?>
+
 		</div>
 	</div>
 	<footer class="footer">
@@ -113,7 +123,6 @@
 	</footer>
 	<script src="/js/tether.min.js"></script>
 	<script src="/js/jquery-3.2.1.min.js"></script>
-	<!-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> -->
 	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>
