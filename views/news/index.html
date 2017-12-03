@@ -1,23 +1,28 @@
-<h2> News </h2>
+<h2> Новини </h2>
 
-<div class="container">
 
-<a href="/news/create">Create news</a><br><br>
+<a href="/news/create" class="float-right">
+	<button type="button" class="btn btn-outline-primary">
+		Створити новину
+	</button>
+</a>
+<br><br>
 <div class="row">
+
 <?php 
 	foreach ($data['news'] as $post) {
 		?>
 
 		<div class="col-md-4">
-			<div class="news">
+			<div class="shadowbox">
 				<div class="ntitle">
 					<h2><?=$post['title'] ?></h2>
 				</div>
 				<div class="ntext">
-					<?=$post['content'] ?>
+					<?=mb_strimwidth(strip_tags(htmlspecialchars_decode($post['content'])), 0, 150, "..."); ?>
 				</div>
 				<div class="nbutton">
-					<p><a class="btn btn-secondary" href="/news/view/<?=$post['id'] ?>" role="button">Browse</a></p>
+					<p><a href="/news/view/<?=$post['id'] ?>"><button class="btn btn-secondary float-right">Details</button></a></p>
 				</div>
 			</div>
 		</div>

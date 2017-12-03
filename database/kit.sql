@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 03 2017 г., 09:17
+-- Время создания: Дек 03 2017 г., 18:49
 -- Версия сервера: 5.7.14
 -- Версия PHP: 5.6.25
 
@@ -48,7 +48,32 @@ INSERT INTO `books` (`id`, `title`, `description`, `file_name`, `author`, `user_
 (5, 'Inf-ak', 'No description', 'inf-ak.pdf', 'Me', 2, '2015-05-01'),
 (6, 'Indicidual tasks', 'I dont know, who is it', 'Індивід. завдання.pdf', 'Me', 2, '2010-01-01'),
 (7, 'Indicidual tasks', 'I dont know, who is it', '', 'Me', 2, '2017-01-01'),
-(8, 'Indicidual tasks', 'I dont know, who is it', 'php9C86.tmp', 'Me', 2, '2017-01-01');
+(8, 'Indicidual tasks', 'I dont know, who is it', 'php9C86.tmp', 'Me', 2, '2017-01-01'),
+(9, 'CodeWars', 'Description', 'phpD4C.tmp', 'Author', 2, '2016-01-04');
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `entries`
+--
+
+CREATE TABLE `entries` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `training_id` int(11) NOT NULL,
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `progress` int(11) NOT NULL DEFAULT '0'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Записи на тренінги';
+
+--
+-- Дамп данных таблицы `entries`
+--
+
+INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) VALUES
+(1, 2, 2, '2017-12-03 14:27:00', 0),
+(2, 2, 2, '2017-12-03 14:53:00', 0),
+(3, 2, 1, '2017-12-03 16:56:56', 0),
+(4, 2, 4, '2017-12-03 18:39:46', 0);
 
 -- --------------------------------------------------------
 
@@ -70,7 +95,10 @@ CREATE TABLE `lections` (
 
 INSERT INTO `lections` (`id`, `title`, `content`, `date`, `training_id`) VALUES
 (1, 'Test lection', 'This is test lection for...', '2017-11-29 20:33:16', 1),
-(2, 'Some lection ', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio dolorum deleniti, ullam dolor facilis ea quia, dicta in, impedit reprehenderit iure tempora cupiditate quasi, distinctio ad illum quis rem! Voluptatibus!', '2017-11-29 20:39:08', 1);
+(2, 'Some lection ', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio dolorum deleniti, ullam dolor facilis ea quia, dicta in, impedit reprehenderit iure tempora cupiditate quasi, distinctio ad illum quis rem! Voluptatibus!', '2017-11-29 20:39:08', 1),
+(3, 'Lect1', 'Content', '2017-12-03 14:56:50', 2),
+(4, 'Empty lection', 'Empty content', '2017-12-03 15:20:13', 3),
+(5, 'So...', 'sadasd', '2017-12-03 15:20:19', 3);
 
 -- --------------------------------------------------------
 
@@ -128,6 +156,7 @@ CREATE TABLE `subjects` (
 --
 
 INSERT INTO `subjects` (`id`, `name`, `description`) VALUES
+(3, 'English', 'London is a capital of Great Britain'),
 (2, 'Математика', 'Хороший предмет');
 
 -- --------------------------------------------------------
@@ -162,7 +191,9 @@ CREATE TABLE `trainings` (
 
 INSERT INTO `trainings` (`id`, `name`, `user_id`, `subject_id`, `private`) VALUES
 (1, 'Test training', 2, 2, 1),
-(2, 'Test training 2', 2, 2, 1);
+(2, 'Test training 2', 2, 2, 1),
+(3, 'Training123', 2, 2, 0),
+(4, 'Learning English', 2, 3, 0);
 
 -- --------------------------------------------------------
 
@@ -190,7 +221,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `registration_date`, `access`, `last_visit`, `city`, `about`, `avatar`, `workplace`) VALUES
-(2, 'timoniann@gmail.com', '5b1b68a9abf4d2cd155c81a9225fd158', 'Timoniann', 'Timones', '2017-11-29 12:40:16', 0, NULL, 'Khust', 'It is about for me', 'phpE2BE.tmp', NULL),
+(2, 'timoniann@gmail.com', '5b1b68a9abf4d2cd155c81a9225fd158', 'Timoniann', 'Timones', '2017-11-29 12:40:16', 3, NULL, 'Khust', 'It is about for me', 'phpE2BE.tmp', 'UZhNU'),
 (3, 'test@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Test', 'Test', '2017-11-30 12:17:10', 0, NULL, NULL, NULL, NULL, NULL);
 
 --
@@ -201,6 +232,12 @@ INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `regi
 -- Индексы таблицы `books`
 --
 ALTER TABLE `books`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `entries`
+--
+ALTER TABLE `entries`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -253,12 +290,17 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT для таблицы `books`
 --
 ALTER TABLE `books`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+--
+-- AUTO_INCREMENT для таблицы `entries`
+--
+ALTER TABLE `entries`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `lections`
 --
 ALTER TABLE `lections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
@@ -273,7 +315,7 @@ ALTER TABLE `questions`
 -- AUTO_INCREMENT для таблицы `subjects`
 --
 ALTER TABLE `subjects`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT для таблицы `tests`
 --
@@ -283,7 +325,7 @@ ALTER TABLE `tests`
 -- AUTO_INCREMENT для таблицы `trainings`
 --
 ALTER TABLE `trainings`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `users`
 --

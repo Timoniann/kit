@@ -21,6 +21,22 @@ class Model
 		return $this->db->query($sql);
 	}
 
+	public function get($array)
+	{
+		$where = "WHERE ";
+		if (count($array)) {
+			foreach ($array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key='$value' AND ";
+			}
+			$where = substr($where, 0, -4);
+		} else return;
+
+		$sql = "SELECT * FROM $this->table_name $where";
+
+		return $this->db->query($sql);
+	}
+
 	public function deleteById($id)
 	{
 		$id = (int)$id;

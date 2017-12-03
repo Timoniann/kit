@@ -1,11 +1,51 @@
-<br>
-<h3>Page view all</h3>
-<br>
-Users: <br>
-<?php
+<h3>Користувачі сайту</h3>
 
-	foreach ($data['users'] as $user) {
-		echo "<a href='/users/view/" . $user['id'] . "'>" . $user['first_name'] . " " . $user['last_name'] . "</a><br>";
-	}
 
-?>
+<a href="/profile" class="float-right">
+	<button type="button" class="btn btn-outline-primary">
+		Перейти в свій профіль
+	</button>
+</a>
+<br><br>
+
+<table class="table text-center">
+
+	<thead class="thead-inverse">
+		<tr>
+			<th>ФІО</th>
+			<th>Останній візит</th>
+			<th>City</th>
+			<th>Workplace</th>
+			<th>Роль на сайті</th>
+		</tr>
+	</thead>
+
+	<tbody>
+
+		<?php foreach ($data['users'] as $user) { ?>
+			<tr>
+				<td>
+					<img width="50" height="50" class='rounded mx-auto d-block float-left' src='
+					<?=($user['avatar']) ? "/uploads/avatars/{$user['avatar']}" : "/public/images/avatar.png";?>'>
+					<a href='/users/view/<?=$user['id'];?>'>
+						<?=$user['first_name'];?> <?=$user['last_name'];?>
+					</a>
+				</td>
+				<td>
+					<?=$user['last_visit'];?>
+				</td>
+				<td>
+					<?=$user['city'];?>
+				</td>
+				<td>
+					<?=$user['workplace'];?>
+				</td>
+				<td>
+					<?=$user['access'] == 0 ? "Normal user" : ($user['access'] == 1 ? "Teacher" : ($user['access'] == 2 ? "Admin" : "SuperAdmin"));?>
+				</td>
+			</tr>
+
+		<?php } ?>
+
+	</tbody>
+</table>

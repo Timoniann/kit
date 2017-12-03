@@ -4,12 +4,30 @@ class ProfileController extends Controller
 {
 	public function init()
 	{
-		
+		if(!Session::getCurrentUser())
+			Router::redirect("/users/auth");
 	}
 
 	public function index()
 	{
-		$this->data['user'] = Session::getCurrentUser();
+		$trainings_table = new Trainings();
+		$books_table = new Books();
+		$entries_table = new Entries();
+
+		$user = Session::getCurrentUser();
+		$this->data['user'] = $user;
+		
+		$entries = $entries_table->getByUserId($user['id']);
+
+		$trainings = array();
+		foreach ($entries as $entry) {
+			array_push($trainings, $trainings_table->getById($entry['training_id'])[0]);
+			$trainings[count($trainings) - 1]['progress'] = $entry['progress'];
+		}
+		$this->data['trainings'] = $trainings;
+
+		$this->data['books'] = $books_table->get(array('user_id' => $user['id']));
+
 	}
 
 	public function edit()
@@ -58,6 +76,14 @@ class ProfileController extends Controller
 					Session::setFlash("City edited");
 				} else {
 					Session::setFlash("City not edited");
+				}
+			}
+			if (isset($_POST['workplace'])) {
+				$workplace = $_POST['workplace'];
+				if($user_table->update($current_user["id"], array('workplace' => $workplace))){
+					Session::setFlash("Workplace edited");
+				} else {
+					Session::setFlash("Workplace not edited");
 				}
 			}
 			if (isset($_POST['about'])) {

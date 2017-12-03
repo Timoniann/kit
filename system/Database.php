@@ -30,6 +30,7 @@ class Database
 		if (!$this->connection) return false;
 		
 		$result = $this->connection->query($sql);
+		//echo $this->error() . "$sql";
 		if ($this->error()) throw new Exception($this->connection);
 		if (is_bool($result)) return $result;
 

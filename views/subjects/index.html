@@ -1,9 +1,36 @@
-<a href="/subjects/create">Create subject</a><br><br>
+<h3>Список предметів</h3>
 
-<?php
+<a href="/subjects/create" class="float-right">
+	<button type="button" class="btn btn-outline-primary">
+		Create subject
+	</button>
+</a>
+<br><br>
 
-	for ($i=0; $i < count($data); $i++) { 
-		echo "<a href='/subjects/view/" . $data[$i]['id'] . "'>" . $data[$i]["name"] . "</a><br>";
-	}
+<table class="table text-center">
 
-?>
+	<thead class="thead-inverse">
+		<tr>
+			<th>Назва предмету</th>
+			<th>Короткий опис</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php
+
+			foreach ($data['subjects'] as $subject) { ?>
+				<tr>
+					<td>
+						<a href='/subjects/view/<?=$subject['id'];?>'>
+							<?=$subject["name"];?>
+						</a>
+					</td>
+					<td>
+						<?=$subject['description'];?>
+					</td>
+				</tr>
+			<?php } ?>
+	</tbody>
+
+</table>

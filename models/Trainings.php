@@ -5,7 +5,7 @@ class Trainings extends Model
 	public function add($name, $private, $subject_id, $user_id)
 	{
 		$name = $this->db->escape($name);
-		$private = (bool) $private;
+		$private = (int)((bool) $private);
 		$subject_id = (int) $subject_id;
 		$user_id = (int) $user_id;
 
