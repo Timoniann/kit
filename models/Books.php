@@ -19,7 +19,8 @@ class Books extends Model
     {
         $author_name = $this->db->escape($author_name);
 
-        $sql = "SELECT * FROM $this->table_name WHERE author LIKE '$author_name'";
+        $sql = "SELECT * FROM $this->table_name WHERE author LIKE '%$author_name%' ORDER BY id DESC";
+
         return $this->db->query($sql);
     }
 }
