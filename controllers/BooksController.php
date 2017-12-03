@@ -50,6 +50,8 @@ class BooksController extends Controller
 	{
 		$this->data["books"] = $this->table->getAll();
 	}
+
+
 }
 
 ?>
