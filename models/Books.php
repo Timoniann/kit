@@ -14,6 +14,15 @@ class Books extends Model
 
 		return $this->db->query($sql);
 	}
+
+	public function search_by_author($author_name)
+    {
+        $author_name = $this->db->escape($author_name);
+
+        $sql = "SELECT * FROM $this->table_name WHERE author LIKE '$author_name'";
+        return $this->db->query($sql);
+    }
 }
+
 
 ?>
