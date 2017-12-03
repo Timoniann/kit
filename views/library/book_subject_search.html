@@ -1,10 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<br>
+<h3>Search books by Subject</h3>
+<br>
+Books: <br>
+<?php
 
-</body>
-</html>
+	foreach ($data['books'] as $book) {
+		echo "<a href='/books/view/" . $book['id'] . "'>" . $book['title'] . " " . $book['description'] . "</a><br>";
+}
+
+?>
