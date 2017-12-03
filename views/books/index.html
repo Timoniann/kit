@@ -1,9 +1,48 @@
-<a href="/books/create">Create book</a><br>
+<h2>Книгарня</h2>
 
-<?php
+<a href="/books/create" class="float-right">
+	<button type="button" class="btn btn-outline-primary">
+		Create book
+	</button>
+</a>
+<br><br>
 
-foreach ($data['books'] as $book) {
-	echo "<a href='/books/view/" . $book['id'] . "'>" . $book['title'] . "</a><br>";
-}
 
-?>
+<table class="table text-center">
+
+	<thead class="thead-inverse">
+		<tr>
+			<th>Назва книги</th>
+			<th>Опис</th>
+			<th>Автор</th>
+			<th>Рік видання</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php
+
+			foreach ($data['books'] as $book) { ?>
+				<tr>
+					<td>
+						<a href='/books/view/<?=$book['id'];?>'>
+							<?=$book["title"];?>
+						</a>
+					</td>
+					<td>
+						<?=$book['description'];?>
+					</td>
+					
+					<td>
+						<?=$book['author'];?>
+					</td>
+					
+					<td>
+						<?=$book['release_date'];?>
+					</td>
+
+				</tr>
+			<?php } ?>
+	</tbody>
+
+</table>

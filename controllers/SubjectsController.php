@@ -14,7 +14,7 @@ class SubjectsController extends Controller
 
 	public function index()
 	{
-		$this->data = $this->subject_table->getAll();
+		$this->data['subjects'] = $this->subject_table->getAll();
 	}
 
 	public function create()
