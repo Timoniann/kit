@@ -1,0 +1,20 @@
+<div class="col-md-6">
+	<div class="panel with-nav-tabs panel-default">
+		<ul class="nav nav-tabs" role="tablist">
+		<?php 
+			$count = 0;
+			foreach ($data['lections'] as $lection) { ?>
+			<li class="nav-item">
+				<a class="nav-link" href="#id<?=$count++;?>" role="tab" data-toggle="tab"><?=$lection['title'];?></a>
+			</li>
+		<?php } $count = 0; ?>
+		</ul>
+
+		<div class="tab-content">
+		<?php foreach ($data['lections'] as $lection) { ?>
+			<div role="tabpanel" class="tab-pane fade" id="id<?=$count++;?>"><?=$lection['content'];?></div>
+		<?php } ?>
+		</div>
+	</div>
+</div>
+
