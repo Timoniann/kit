@@ -20,7 +20,7 @@ class Session
 
 	public static function showFlash()
 	{
-		self::$flash_message = (self::$flash_message == null) ? get("message") : self::$flash_message;
+		self::$flash_message = self::$flash_message ? self::$flash_message : get("message");
 		$color = self::$color_message;
 		//echo "<div style='color:{$color}'>";
 		echo self::$flash_message;

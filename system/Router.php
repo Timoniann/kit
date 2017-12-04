@@ -67,11 +67,13 @@
 		public static function redirectToBack()
 		{
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			exit();
 		}
 
 		public static function redirect($path)
 		{
 			header("Location: $path");
+			exit();
 		}
 	}
 

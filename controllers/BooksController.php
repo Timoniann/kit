@@ -1,8 +1,5 @@
 <?php
 
-/**
-* 
-*/
 class BooksController extends Controller
 {
 	private $table;
@@ -14,6 +11,11 @@ class BooksController extends Controller
 
 	public function create()
 	{
+		if (!App::teacherPermission()) {
+			Session::setFlash("Your access not allow you create books");
+			Router::redirect("/books");
+		}
+
 		if (!empty($_POST)) {
 
 			$uploaddir = ROOT . '/public/uploads/books/';

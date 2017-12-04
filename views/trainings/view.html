@@ -1,14 +1,286 @@
-<?php
+Training: 
+	<h2>
+		<?=$data['training']['name'];?>
+	</h2>
+Access: 
+	<h3>
+		<?=$data['training']['private'] ? "Private" : "Public";?>
+	</h3>
+Author: 
+	<h4> 
+		<a href='/users/view/<?=$data['user']['id'];?>'>
+			<?=$data['user']['first_name'] . " " . $data['user']['last_name'];?>
+		</a>
+	</h4>
 
-	echo "Training: <h2>" . $data['training']['name'] . "</h2>";
-	echo "Access: <h3>" . ($data['training']['private'] ? "Private" : "Public") . "</h3>";
-	echo "Author: <h4> <a href='/users/view/" . $data['user']["id"] . "'>" . $data['user']['first_name'] . " " . $data['user']['last_name'] . "</a></h4>";
+<h4>Activity</h4>
 
-	echo "<a href='/lections/create/" . $data['training']['id'] . "'>Add lection</a>";
+<!-- Training tabs -->
+<div class="panel with-nav-tabs panel-default" style="display: inline-block; width: 100%">
 
-	echo "<h4>Lections:</h4>";
-	foreach ($data['lections'] as $lection) {
-		echo "<a href='/lections/view/" . $lection['id'] . "'>" . $lection['title'] . "</a>";
-		echo "<br>";
-	}
-?>
+    <!-- Main tabs -->
+	<ul class="nav nav-tabs" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link" href="#lections" role="tab" data-toggle="tab">Lections</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" href="#tests" role="tab" data-toggle="tab">Tests</a>
+		</li>
+	</ul>
+
+    <br>
+
+	<div class="tab-content">
+
+        <!-- Lections tabs -->
+		<div role="tabpanel" class="tab-pane fade" id="lections">
+			
+			<div class="tabbable tabs-left">
+
+                <!-- List of lections -->
+				<ul style="width: 15%" class="nav nav-tabs nav-tabs-left tabs-left flex-column " role="tablist">
+
+					<?php foreach ($data['lections'] as $lection) { ?>
+						<li class="nav-item">
+							<a class="nav-link tab-left" href="#lection<?=$lection['id'];?>" role="tab" data-toggle="tab"><?=$lection['title']?></a>
+						</li>
+					<?php } ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link tab-left align-bottom float-left btn btn-outline-success" href="#lection_create" role="tab" data-toggle="tab">Додати лекцію </a>
+                    </li>
+
+				</ul>
+
+				<div class="tab-content">
+
+                    
+					<?php foreach ($data['lections'] as $lection) { ?>
+						<div role="tabpanel" class="tab-pane fade" id="lection<?=$lection['id'];?>">
+							<div class="shadowbox white full" style="width: 80%; float: right; text-align: right;"> 
+                                <form method="post" action="/lections/edit">
+									
+                                    <input type="hidden" name="lection_id" value="<?=$lection['id'];?>">
+									
+                                    <div class="form-group">
+										<textarea rows="10" class="form-control" name="lection_content"><?=$lection['content'];?></textarea>
+									</div>
+									
+                                    <div class="form-group">
+    									<span class="input-group-btn float-right">
+                                            <button type="submit" class="btn btn-primary">Change</button>
+                                        </span>
+                                    </div>
+                                    
+                                    <br><Br>
+
+								</form>
+                            </div>
+						</div>
+					<?php } ?>
+
+                    <!-- Create lection -->
+                    <div role="tabpanel" class="tab-pane fade" id="lection_create">
+                        <div class="shadowbox white full" style="width: 80%; float: right;"> 
+                            <form method="post" action="/lections/create">
+                                
+                                <input type="hidden" name="training_id" value="<?=$data['training']['id'];?>">
+
+                                <div class="form-group">
+                                    <label>Lection title</label>
+                                    <input placeholder="Title" type="text" name="lection_title" class="form-control" required >
+                                </div>
+
+                                <div class="form-group">
+                                    <label>Lection content</label>
+                                    <textarea rows="10" class="form-control" name="lection_content" required></textarea>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <span class="input-group-btn float-right">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </span>
+                                </div>
+                                
+                                <br><Br>
+
+                            </form>
+                        </div>
+                    </div>
+
+				</div>
+			</div>
+
+		</div>
+
+        <!-- Tests tabs -->
+		<div role="tabpanel" class="tab-pane fade" id="tests">
+			
+            <div class="tabbable tabs-left">
+
+                <!-- List of tests -->
+                <ul style="width: 15%" class="nav nav-tabs nav-tabs-left tabs-left flex-column " role="tablist">
+
+                    <?php foreach ($data['tests'] as $test) { ?>
+                        <li class="nav-item">
+                            <a class="nav-link tab-left" href="#test<?=$test['id'];?>" role="tab" data-toggle="tab"><?=$test['title']?></a>
+                        </li>
+                    <?php } ?>
+
+                    <li class="nav-item">
+                        <a class="nav-link tab-left align-bottom float-left btn btn-outline-success" href="#test_create" role="tab" data-toggle="tab">Додати test </a>
+                    </li>
+
+                </ul>
+
+                <div class="tab-content">
+
+                    <?php foreach ($data['tests'] as $test) { ?>
+                        <div role="tabpanel" class="tab-pane fade" id="test<?=$test['id'];?>">
+                            <div class="shadowbox white full" style="width: 80%; float: right; text-align: right;"> 
+                                
+                                <div class="tabbable tabs-left">
+
+                                    <!-- List of questions -->
+                                    <ul style="width: 15%" class="nav nav-tabs nav-tabs-left tabs-left flex-column " role="tablist">
+
+                                        <?php foreach ($test['questions'] as $question) { ?>
+                                            <li class="nav-item">
+                                                <a class="nav-link tab-left" href="#question<?=$question['id'];?>" role="tab" data-toggle="tab"><?=$question['question']?></a>
+                                            </li>
+                                        <?php } ?>
+
+                                        <li class="nav-item">
+                                            <a class="nav-link tab-left align-bottom float-left btn btn-outline-success" href="#question_create<?=$test['id'];?>" role="tab" data-toggle="tab">Додати question </a>
+                                        </li>
+
+                                    </ul>
+
+                                    <div class="tab-content">
+
+                                        <?php foreach ($test['questions'] as $question) { ?>
+                                            <div role="tabpanel" class="tab-pane fade" id="question<?=$question['id'];?>">
+                                                <div class="shadowbox white full" style="width: 80%; float: right; text-align: right;">
+                                                    <form method="post" action="/questions/edit">
+                                                        
+                                                        <input type="hidden" name="question_id" value="<?=$question['id'];?>">
+        
+                                                        <div class="form-group">
+                                                            <label>Question</label>
+                                                            <textarea rows="5" class="form-control" name="question_question"><?=$question['question'];?></textarea>
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Answer</label>
+                                                            <input placeholder="True answer" type="text" name="question_answer" class="form-control" required value="<?=$question['answer'];?>" >
+                                                        </div>
+                                                        
+                                                        <div class="form-group">
+                                                            <label>Variant 1</label>
+                                                            <input placeholder="Wrong answer" type="text" name="question_variant1" class="form-control" required value="<?=$question['variant1'];?>" >
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Variant 2</label>
+                                                            <input placeholder="Wrong answer" type="text" name="question_variant2" class="form-control" required value="<?=$question['variant2'];?>" >
+                                                        </div>
+
+                                                        <div class="form-group">
+                                                            <label>Variant 3</label>
+                                                            <input placeholder="Wrong answer" type="text" name="question_variant3" class="form-control" required value="<?=$question['variant3'];?>">
+                                                        </div>
+            
+
+                                                        <div class="form-group">
+                                                            <span class="input-group-btn float-right">
+                                                                <button type="submit" class="btn btn-primary">Edit</button>
+                                                            </span>
+                                                        </div>
+                                                        
+                                                        <br><Br>
+
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        <?php } ?>
+
+                                        <!-- Create question -->
+                                        <div role="tabpanel" class="tab-pane fade" id="question_create<?=$test['id'];?>">
+                                            <div class="shadowbox white full" style="width: 80%; float: right;"> 
+                                                <form method="post" action="/questions/create">
+                                                    
+                                                    <input type="hidden" name="test_id" value="<?=$test['id'];?>">
+    
+                                                    <div class="form-group">
+                                                        <label>Question</label>
+                                                        <textarea rows="5" class="form-control" name="question_question"></textarea>
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Answer</label>
+                                                        <input placeholder="True answer" type="text" name="question_answer" class="form-control" required >
+                                                    </div>
+                                                    
+                                                    <div class="form-group">
+                                                        <label>Variant 1</label>
+                                                        <input placeholder="Wrong answer" type="text" name="question_variant1" class="form-control" required >
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Variant 2</label>
+                                                        <input placeholder="Wrong answer" type="text" name="question_variant2" class="form-control" required >
+                                                    </div>
+
+                                                    <div class="form-group">
+                                                        <label>Variant 3</label>
+                                                        <input placeholder="Wrong answer" type="text" name="question_variant3" class="form-control" required >
+                                                    </div>
+        
+
+                                                    <div class="form-group">
+                                                        <span class="input-group-btn float-right">
+                                                            <button type="submit" class="btn btn-primary">Create</button>
+                                                        </span>
+                                                    </div>
+                                                    
+                                                    <br><Br>
+
+                                                </form>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- Create test -->
+                    <div role="tabpanel" class="tab-pane fade" id="test_create">
+                        <div class="shadowbox white full" style="width: 80%; float: right;"> 
+                            <form method="post" action="/tests/create">
+
+                                <input type="hidden" name="training_id" value="<?=$data['training']['id'];?>">
+                                <div class="form-group">
+                                    <label>Test title</label>
+                                    <input placeholder="Title" type="text" name="test_title" class="form-control" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <span class="input-group-btn float-right">
+                                        <button type="submit" class="btn btn-primary">Create</button>
+                                    </span>
+                                </div>
+                                
+                                <br><Br>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
