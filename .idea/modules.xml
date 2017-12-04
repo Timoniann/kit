@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/kit.iml" filepath="$PROJECT_DIR$/.idea/kit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/../openosh.site.local/.idea/openosh.site.local.iml" filepath="$PROJECT_DIR$/../openosh.site.local/.idea/openosh.site.local.iml" />
     </modules>
   </component>
 </project>
