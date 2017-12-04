@@ -104,7 +104,7 @@
 
 			<?php if(Session::hasFlash()) { ?>
 
-				<div class="alert alert-info  alert-dismissible" role="alert">
+				<div class="alert alert-<?=Session::get('type');?> alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
 					<?php Session::showFlash(); ?>
