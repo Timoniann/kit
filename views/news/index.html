@@ -1,12 +1,17 @@
 <h2> Новини </h2>
 
 
+<?php
 
-<a href="/news/create" class="float-right">
-	<button type="button" class="btn btn-outline-primary">
-		Створити новину
-	</button>
-</a>
+if (App::adminPermission()) { ?>
+    <a href="/news/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Створити новину
+		</button>
+	</a>
+
+<?php } ?>
+
 <br><br>
 <div class="row">
 

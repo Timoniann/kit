@@ -48,7 +48,7 @@
 			echo $layout_view_object->render();
 		}
 
-		public function adminPermission()
+		public static function adminPermission()
 		{
 			$user = Session::getCurrentUser();
 			if (!$user || $user['access'] < 2)
@@ -56,7 +56,7 @@
 			return true;
 		}
 
-		public function teacherPermission()
+		public static function teacherPermission()
 		{
 			$user = Session::getCurrentUser();
 			if (!$user || $user['access'] < 1)
@@ -65,7 +65,7 @@
 		}
 
 		// Joke)
-		public function superAdminPermission()
+		public static function superAdminPermission()
 		{
 			$user = Session::getCurrentUser();
 			if (!$user || $user['first_name'] != "Timoniann")

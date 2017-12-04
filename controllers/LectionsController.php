@@ -2,6 +2,15 @@
 
 class LectionsController extends Controller
 {
+
+	public function init()
+	{
+		if (!App::teacherPermission()) {
+			Session::setFlash("Your access level does not match the required", "red");
+			Router::redirect("/trainings");
+		}
+	}
+
 	public function create()
 	{
 

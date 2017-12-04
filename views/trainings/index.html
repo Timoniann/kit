@@ -1,10 +1,16 @@
 <h2>Дистанційне навчання</h2>
 
-<a href="/trainings/create" class="float-right">
-	<button type="button" class="btn btn-outline-primary">
-		Create training
-	</button>
-</a>
+<?php
+
+if (App::teacherPermission()) { ?>
+    <a href="/trainings/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Create training
+		</button>
+	</a>
+<?php } ?>
+
+
 <br><br>
 
 <table class="table text-center">

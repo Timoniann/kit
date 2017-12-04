@@ -6,7 +6,8 @@ class TrainingsController extends Controller
 	private $table;
 	public function init()
 	{
-		if(!Session::getCurrentUser()) Router::redirect("/users/auth");
+		if(!Session::getCurrentUser()) 
+			Router::redirect("/users/auth");
 		$this->table = new Trainings();
 	}
 
