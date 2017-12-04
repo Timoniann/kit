@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 03 2017 г., 18:49
+-- Время создания: Дек 04 2017 г., 18:00
 -- Версия сервера: 5.7.14
 -- Версия PHP: 5.6.25
 
@@ -73,7 +73,8 @@ INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) VALUE
 (1, 2, 2, '2017-12-03 14:27:00', 0),
 (2, 2, 2, '2017-12-03 14:53:00', 0),
 (3, 2, 1, '2017-12-03 16:56:56', 0),
-(4, 2, 4, '2017-12-03 18:39:46', 0);
+(4, 2, 4, '2017-12-03 18:39:46', 0),
+(5, 3, 1, '2017-12-04 19:31:43', 0);
 
 -- --------------------------------------------------------
 
@@ -94,11 +95,15 @@ CREATE TABLE `lections` (
 --
 
 INSERT INTO `lections` (`id`, `title`, `content`, `date`, `training_id`) VALUES
-(1, 'Test lection', 'This is test lection for...', '2017-11-29 20:33:16', 1),
+(1, 'Test lection', 'This is test lection for...sad', '2017-11-29 20:33:16', 1),
 (2, 'Some lection ', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Optio dolorum deleniti, ullam dolor facilis ea quia, dicta in, impedit reprehenderit iure tempora cupiditate quasi, distinctio ad illum quis rem! Voluptatibus!', '2017-11-29 20:39:08', 1),
 (3, 'Lect1', 'Content', '2017-12-03 14:56:50', 2),
 (4, 'Empty lection', 'Empty content', '2017-12-03 15:20:13', 3),
-(5, 'So...', 'sadasd', '2017-12-03 15:20:19', 3);
+(5, 'So...', 'sadasd', '2017-12-03 15:20:19', 3),
+(6, 'Predicates', 'Simple contentLorem ipsum dolor sit amet, consectetur adipisicing elit. Atque, ex. Eligendi ducimus commodi sapiente ullam a, animi rerum. Vel rerum, magnam vero culpa doloribus harum fuga quia laborum quos accusamus?\r\nQuantum', '2017-12-04 07:54:01', 4),
+(7, 'Simple', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam distinctio quia, dolore necessitatibus nemo nam, dolor ducimus labore inventore, ea animi impedit assumenda totam, sequi libero alias asperiores eos voluptas.\r\nKaka', '2017-12-04 14:48:09', 4),
+(8, 'Test navbar', 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem officiis inventore consequuntur ratione omnis facere velit facilis debitis veniam sed sunt, perspiciatis asperiores harum atque dolore expedita esse, veritatis. Hic.Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem officiis inventore consequuntur ratione omnis facere velit facilis debitis veniam sed sunt, perspiciatis asperiores harum atque dolore expedita esse, veritatis. Hic.\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem officiis inventore consequuntur ratione omnis facere velit facilis debitis veniam sed sunt, perspiciatis asperiores harum atque dolore expedita esse, veritatis. Hic.\r\n\r\nLorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatem officiis inventore consequuntur ratione omnis facere velit facilis debitis veniam sed sunt, perspiciatis asperiores harum atque dolore expedita esse, veritatis. Hic.', '2017-12-04 16:06:35', 4),
+(9, 'Some lection', 'Some titlefs;fsdfsdf', '2017-12-04 17:32:00', 1);
 
 -- --------------------------------------------------------
 
@@ -139,6 +144,14 @@ CREATE TABLE `questions` (
   `test_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- Дамп данных таблицы `questions`
+--
+
+INSERT INTO `questions` (`id`, `question`, `answer`, `variant1`, `variant2`, `variant3`, `test_id`) VALUES
+(1, 'Some question', 'Answer', 'Var1', 'Var2', 'Var3', 1),
+(2, 'Why me?', 'Cz u r z master', 'No', 'NO', 'NO', 4);
+
 -- --------------------------------------------------------
 
 --
@@ -168,8 +181,18 @@ INSERT INTO `subjects` (`id`, `name`, `description`) VALUES
 CREATE TABLE `tests` (
   `id` int(11) NOT NULL,
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
+  `training_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `tests`
+--
+
+INSERT INTO `tests` (`id`, `title`, `training_id`) VALUES
+(1, 'FirstTest', 4),
+(2, 'TestTest', 4),
+(3, 'Adding test throught navbar', 4),
+(4, 'Test', 1);
 
 -- --------------------------------------------------------
 
@@ -295,12 +318,12 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT для таблицы `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT для таблицы `lections`
 --
 ALTER TABLE `lections`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT для таблицы `news`
 --
@@ -310,7 +333,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT для таблицы `questions`
 --
 ALTER TABLE `questions`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT для таблицы `subjects`
 --
@@ -320,7 +343,7 @@ ALTER TABLE `subjects`
 -- AUTO_INCREMENT для таблицы `tests`
 --
 ALTER TABLE `tests`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT для таблицы `trainings`
 --
