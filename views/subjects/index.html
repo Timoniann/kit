@@ -1,10 +1,18 @@
 <h3>Список предметів</h3>
 
-<a href="/subjects/create" class="float-right">
-	<button type="button" class="btn btn-outline-primary">
-		Create subject
-	</button>
-</a>
+<?php
+
+if (App::teacherPermission()) { ?>
+	<a href="/subjects/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Create subject
+		</button>
+	</a>
+<?php } ?>
+
+
+
+
 <br><br>
 
 <table class="table text-center">

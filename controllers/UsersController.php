@@ -11,15 +11,15 @@ class UsersController extends Controller
 
 	public function all()
 	{
-		$this->data["users"] = $this->table->getAll();
+		
 	}
 
 	public function index()
 	{
-		$user = Session::getCurrentUser();
-		if ($user == null) {
+		if (!Session::getCurrentUser()) 
 			Router::redirect("/users/auth");
-		}
+		
+		$this->data["users"] = $this->table->getAll();
 	}
 
 	public function registration()

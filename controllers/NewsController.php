@@ -17,6 +17,11 @@ class NewsController extends Controller
 
     public function create()
     {
+        if (!App::teacherPermission()) {
+            Session::setFlash("Your access level does not match the required", "red");
+            Router::redirect("/news");
+        }
+
     	if (!empty($_POST)) {
     		$title = $_POST['news_title'];
     		$content = $_POST['news_content'];
