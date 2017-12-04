@@ -36,6 +36,9 @@ class TrainingsController extends Controller
 
 	public function create()
 	{
+		if (!App::teacherPermission())
+			Router::redirect("/trainings");
+
 		$subject_table = new Subjects();
 		$this->data["subjects"] = $subject_table->getAll();
 
@@ -62,6 +65,58 @@ class TrainingsController extends Controller
 				$this->data['user'] = $user[0];
 				$this->data['user'];
 
+				$this->data['current_user'] = Session::getCurrentUser();
+
+				$lection_table = new Lections();
+				$this->data['lections_count'] = $lection_table->count(array('training_id' => $id));
+
+				$tests_table = new Tests();
+				$this->data['tests_count'] = $tests_table->count(array('training_id' => $id));
+			}
+		}
+	}
+
+	public function edit()
+	{
+		if($this->params && count($this->params)){
+
+			$id = (int)$this->params[0];
+			$trainings = $this->table->getById($id);
+			
+			if (count($trainings)) {
+				$trainings = $this->table->getById($id);
+				if (!App::adminPermission() && (Session::getCurrentUser()  != $trainings['0']['user_id'])){
+					Session::setFlash("YOU CANT HACK ME)))", "danger");
+					Router::redirect("/trainings");
+				}
+
+				if (!empty($_POST)) {
+
+					if (isset($_POST['training_name'])) {
+						$name = $_POST['training_name'];
+						if($this->table->update($id, array("name" => $name)))
+							Session::setFlash("Training name is updated");
+						else
+							Session::setFlash("Training name is not updated");
+					}
+
+					if (isset($_POST['training_type'])) {
+						$private = $_POST['training_type'];
+						if($this->table->update($id, array("private" => $private)))
+							Session::setFlash("Training type is updated");
+						else
+							Session::setFlash("Training type is not updated");
+					}
+
+
+					$trainings = $this->table->getById($id);
+				}
+				$this->data['training'] = $trainings[0];
+				$users_table = new Users();
+				$user = $users_table->getbyId($trainings[0]['user_id']);
+				$this->data['user'] = $user[0];
+				$this->data['user'];
+
 				$lection_table = new Lections();
 				$this->data['lections'] = $lection_table->getByTrainingId($id);
 
@@ -75,8 +130,8 @@ class TrainingsController extends Controller
 				}
 
 				$this->data['tests'] = $tests;
-			}
-		}
+			} else Router::redirect("/trainings");
+		} else Router::redirect("/trainings");
 	}
 
 	public function entry()
