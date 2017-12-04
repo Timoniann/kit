@@ -10,7 +10,7 @@ class Session
 		self::$flash_message = $message;
 		self::$color_message = $color;
 		self::set("message", $message);
-		self::set("color", $color_message);
+		self::set("color", $color);
 	}
 
 	public static function hasFlash()
@@ -22,7 +22,7 @@ class Session
 	public static function showFlash()
 	{
 		self::$flash_message = self::$flash_message ? self::$flash_message : get("message");
-		$color = self::$color_message;
+		//$color = self::$color_message;
 		//echo "<div style='color:{$color}'>";
 		echo self::$flash_message;
 		//echo "</div>";
