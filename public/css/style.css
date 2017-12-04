@@ -64,6 +64,14 @@
   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
 
+.shadowbox.white{
+  background-color: #fff;
+}
+
+.full{
+  width: 100%;
+}
+
 /* testingroom */
 .menutest{
 margin-top:20px;
@@ -135,5 +143,19 @@ margin-bottom: :20px;
 
 
 
+/* For vertival tabs */
+
+.tab-left.active{
+  border-bottom-color: rgb(221, 221, 221)!important;
+  border-right-color: rgb(255, 255, 255)!important;
+}
+.nav.nav-tabs-left {
+  float: left;
+  display: block;
+  margin-right: 20px;
+  border-bottom:0;
+  /*border-right: 1px solid #ddd;*/
+  padding-right: 15px;
+}
 
 

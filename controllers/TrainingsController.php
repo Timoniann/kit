@@ -63,6 +63,17 @@ class TrainingsController extends Controller
 
 				$lection_table = new Lections();
 				$this->data['lections'] = $lection_table->getByTrainingId($id);
+
+				$tests_table = new Tests();
+				$questions_table = new Questions();
+
+				$tests = $tests_table->get(array('training_id' => $id));
+
+				for ($i=0; $i < count($tests); $i++) { 
+					$tests[$i]['questions'] = $questions_table->get(array('test_id' => $tests[$i]['id']));
+				}
+
+				$this->data['tests'] = $tests;
 			}
 		}
 	}
