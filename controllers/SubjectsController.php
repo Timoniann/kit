@@ -20,7 +20,7 @@ class SubjectsController extends Controller
 	public function create()
 	{
         if (!App::teacherPermission()) {
-            Session::setFlash("Your access level does not match the required", "red");
+            Session::setFlash("Your access level does not match the required", "danger");
             Router::redirect("/subjects");
         }
 

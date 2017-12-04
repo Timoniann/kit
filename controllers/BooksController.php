@@ -12,7 +12,7 @@ class BooksController extends Controller
 	public function create()
 	{
 		if (!App::teacherPermission()) {
-			Session::setFlash("Your access not allow you create books", "red");
+			Session::setFlash("Your access not allow you create books", "danger");
 			Router::redirect("/books");
 		}
 
