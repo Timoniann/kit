@@ -60,11 +60,11 @@ Parent-клас моделей є клас Model, який містить в с�
 При створення моделі можна (і потрібно) утворювати свої функції;
 Зразок запиту за id;
 ```php
-	public function getById($id)
-	{
-		$sql = "SELECT * FROM $table_name WHERE id=$id";
-		return $this->db->query($sql);
-	}
+public function getById($id)
+{
+	$sql = "SELECT * FROM $table_name WHERE id=$id";
+	return $this->db->query($sql);
+}
 ```
 
 Клас моделі теж не повинен мати конструктора
@@ -87,20 +87,20 @@ Parent-клас моделей є клас Model, який містить в с�
 	
 	controllers/PageController.php:
 ```php
-	PageController extends Controller
-	{
-		/* ... */
-		public function view(){
-			/* type code here */
-		}
-		/* ... */
+PageController extends Controller
+{
+	/* ... */
+	public function view(){
+		/* type code here */
 	}
+	/* ... */
+}
 ```
 views/page/view.html:
 ```html
-	<div>
-		<b>Action 'view' for controller 'Page'</b>
-	</div>
+<div>
+	<b>Action 'view' for controller 'Page'</b>
+</div>
 ```
 
 ### ~~Порядок створення елементів~~
