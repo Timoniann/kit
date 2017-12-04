@@ -13,7 +13,14 @@ class News extends Model
 
 		return $this->db->query($sql);
 	}
+    public function search_news($news_name)
+    {
+        $news_name = $this->db->escape($news_name);
 
+        $sql = "SELECT * FROM $this->table_name WHERE title LIKE '%$news_name%' or content LIKE  '%$news_name%'";
+
+        return $this->db->query($sql);
+    }
 }
 
 ?>

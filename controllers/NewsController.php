@@ -13,6 +13,16 @@ class NewsController extends Controller
     {
         $news = $this->table->getAll();
         $this->data['news'] = $news;
+        if(!empty ($_POST)){
+
+            if(isset($_POST['search_news'])){
+
+                Router::redirect("/news/search_news/".$_POST['search_news']);
+            }
+
+
+        }
+
     }
 
     public function create()
@@ -31,9 +41,18 @@ class NewsController extends Controller
 
     public function view()
     {
+
     	if (count($this->params)) {
     		$this->data['news'] = $this->table->getById((int)$this->params[0])[0];
     	}
+    }
+    function search_news(){
+
+        $this->params;
+        $this->data['params'] = $this->params;
+        $news_table = new News();
+        $this->data['news'] = $news_table->search_news(array_pop($this->params));
+
     }
 }
 
