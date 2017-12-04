@@ -21,12 +21,22 @@
 				<div class="input-group">
 					<div class="panel with-nav-tabs panel-default">
 						<ul class="nav nav-tabs" role="tablist">
+
 							<li class="nav-item">
 								<a class="nav-link" href="#trainings" role="tab" data-toggle="tab">Trainings</a>
 							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#books" role="tab" data-toggle="tab">Uploaded Books</a>
-							</li>
+
+							<?php if (App::teacherPermission()) { ?>
+
+								<li class="nav-item">
+									<a class="nav-link" href="#books" role="tab" data-toggle="tab">Uploaded Books</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="#created_trainings" role="tab" data-toggle="tab">Created Trainings</a>
+								</li>
+
+							<?php } ?>
 							
 						</ul>
 
@@ -63,6 +73,9 @@
 										</tbody>
 								</table>
 							</div>
+
+							<?php if (App::teacherPermission()) { ?>
+
 							<div role="tabpanel" class="tab-pane fade" id="books">
 								<table class="table">
 										<thead class="thead-inverse">
@@ -91,6 +104,42 @@
 										</tbody>
 								</table>
 							</div>
+
+							<div role="tabpanel" class="tab-pane fade" id="created_trainings">
+								<table class="table">
+										<thead class="thead-inverse">
+											<tr>
+												<th>Назва навчання</th>
+												<th>Тип</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach ($data['user_trainings'] as $training) { ?>
+												<tr>
+													<td>
+														<a href='/trainings/view/<?=$training['id'];?>'>
+															<?=$training['name'];?>
+														</a>
+													</td>
+													<td>
+														<?=($training['private'] ? "Private" : "Public");?>
+													</td>
+													<td>
+														<a href='/trainings/edit/<?=$training['id']?>'>
+															<button type="button" class="btn btn-outline-warning">
+																Редагувати
+															</button>
+														</a>
+													</td>
+												</tr>
+											<?php } ?>
+										</tbody>
+								</table>
+							</div>
+
+							<?php } ?>
+
 						</div>
 					</div>
 				</div>
