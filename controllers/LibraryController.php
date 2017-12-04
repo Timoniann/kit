@@ -1,31 +1,17 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Viktor
- * Date: 03.12.2017
- * Time: 11:58
- */
-
-
-
 
 class LibraryController extends Controller
 {
     function index(){
         if(!empty ($_POST)){
 
-            if(isset($_POST['book_author_search'])){
+            if(isset($_POST['book_author_search']))
+                Router::redirect("/library/book_author_search/" . $_POST['book_author_search']);
 
-                Router::redirect("/library/book_author_search/".$_POST['book_author_search']);
-            } else
-                if(isset($_POST['book_name_search'])){
-
-                    Router::redirect("/library/book_name_search/".$_POST['book_name_search']);
-                }
-
-
+            elseif(isset($_POST['book_name_search']))
+                Router::redirect("/library/book_name_search/" . $_POST['book_name_search']);
         }
-        }
+    }
 
     function book_name_search(){
 
