@@ -1,6 +1,6 @@
 <div class="col-md-11">
 	<div class="regform">
-		<form method="POST" enctype="multipart/form-data">
+		<form method="POST">
 			<legend>Add news</legend>
 			<div class="form-group">
 				<label for="newstitle">Title:</label>
@@ -8,7 +8,7 @@
 			</div>
 			<div class="form-group">
 				<label for="newscontent">Content news:</label>
-				<textarea class="form-control" rows="10" placeholder="Enter content of news" name="news_content" minlength="2" required></textarea>
+				<textarea id="newscontent" class="form-control" rows="10" placeholder="Enter content of news" name="news_content" minlength="2" required></textarea>
 			</div>
 			<div class="text-right">
 				<button type="submit" class="btn btn-primary" >Post</button>
