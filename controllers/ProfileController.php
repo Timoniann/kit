@@ -28,6 +28,8 @@ class ProfileController extends Controller
 
 		$this->data['books'] = $books_table->get(array('user_id' => $user['id']));
 
+		$this->data['user_trainings'] = $trainings_table->get(array('user_id' => $user['id']));
+
 	}
 
 	public function edit()

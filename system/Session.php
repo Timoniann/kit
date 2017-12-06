@@ -3,13 +3,14 @@
 class Session
 {
 	private static $flash_message;
-	private static $color_message;// red, green, blue
+	private static $type_message;// info, danger, warning...
 	
-	public static function setFlash($message, $color = "green")
+	public static function setFlash($message, $type = "info")
 	{
 		self::$flash_message = $message;
-		self::$color_message = $color;
+		self::$type_message = $type;
 		self::set("message", $message);
+		self::set("type", $type);
 	}
 
 	public static function hasFlash()
@@ -21,12 +22,12 @@ class Session
 	public static function showFlash()
 	{
 		self::$flash_message = self::$flash_message ? self::$flash_message : get("message");
-		$color = self::$color_message;
-		//echo "<div style='color:{$color}'>";
+
 		echo self::$flash_message;
-		//echo "</div>";
+		
 		self::$flash_message = null;
 		self::delete("message");
+		self::delete("type");
 	}
 
 	public static function set($key, $value)

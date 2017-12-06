@@ -12,9 +12,13 @@ class BooksController extends Controller
 	public function create()
 	{
 		if (!App::teacherPermission()) {
-			Session::setFlash("Your access not allow you create books");
+			Session::setFlash("Your access not allow you create books", "danger");
 			Router::redirect("/books");
 		}
+
+		$subjects_table = new Subjects();
+
+		$this->data['subjects'] = $subjects_table->getAll();
 
 		if (!empty($_POST)) {
 
@@ -33,8 +37,9 @@ class BooksController extends Controller
 			$description = $_POST['book_description'];
 			$author = $_POST['book_author'];
 			$date = $_POST['book_release_date'];
+			$subject_id = $_POST['subject_id'];
 
-			if($this->table->add($title, $description, $author, $date, $file_name, Session::getCurrentUser()["id"]))
+			if($this->table->add($title, $description, $author, $date, $file_name, Session::getCurrentUser()["id"], $subject_id))
 				Session::setFlash("Good, book os uploaded");
 			else Session::setFlash("Book is not uploaded");
 		}

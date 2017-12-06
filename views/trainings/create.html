@@ -1,20 +1,43 @@
-Creating training
-<form method="POST">
-	Training name: <br>
-	<input type="text" name="training_name" minlength="2"> <br>
-	Training type: <br>
-	<input type="radio" name="training_type" value="0" checked="true">Public <br>
-	<input type="radio" name="training_type"  value="1">Private <br>
-	Subject: <br>
-	<select name="subject">
-		<option value="0" >No subject</option>
-		<?php
-		
-			foreach ($data["subjects"] as $subject) {
-				echo "<option value='" . $subject['id'] . "'>" . $subject['name'] . "</option>";
-			}
-		?>
-	</select><br>
-	<button type="submit">Create</button>
-	
-</form>
+<div class="col-md-11">
+	<div class="regform">
+		<form method="POST" enctype="multipart/form-data">
+			<legend>Creating training</legend>
+
+			<div class="form-group">
+				<label for="trainingname">Training name</label>
+				<input type="text" class="form-control" id="trainingname" aria-describedby="Name" placeholder="Enter name" name="training_name" minlength="2" required>
+			</div>
+
+			<div class="form-check form-group">
+				<label for="trainingtype">Training type:</label>
+				<br>
+				<label class="custom-control custom-radio">
+				  <input name="training_type" type="radio" class="custom-control-input" value="0" checked>
+				  <span class="custom-control-indicator"></span>
+				  <span class="custom-control-description">Public</span>
+				</label>
+				<label class="custom-control custom-radio">
+				  <input name="training_type" type="radio" class="custom-control-input" value="1">
+				  <span class="custom-control-indicator"></span>
+				  <span class="custom-control-description">Private</span>
+				</label>
+			</div>
+
+			<div class="form-group">
+				<label class="mr-sm-2">Subject</label>
+					<select name="subject" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+						<option value="0">No subject</option>
+						<?php
+
+							foreach ($data["subjects"] as $subject) {
+								echo "<option value='" . $subject['id'] . "'>" . $subject['name'] . "</option>";
+							}
+						?>
+					</select>
+			</div>
+			<div class="text-right">
+				<button type="submit" class="btn btn-primary" >Create</button>
+			</div>
+		</form>
+	</div>
+</div>

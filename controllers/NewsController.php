@@ -13,6 +13,7 @@ class NewsController extends Controller
     {
         $news = $this->table->getAll();
         $this->data['news'] = $news;
+        
         if(!empty ($_POST)){
 
             if(isset($_POST['search_news'])){
@@ -20,13 +21,17 @@ class NewsController extends Controller
                 Router::redirect("/news/search_news/".$_POST['search_news']);
             }
 
-
         }
 
     }
 
     public function create()
     {
+        if (!App::teacherPermission()) {
+            Session::setFlash("Your access level does not match the required", "danger");
+            Router::redirect("/news");
+        }
+
     	if (!empty($_POST)) {
     		$title = $_POST['news_title'];
     		$content = $_POST['news_content'];

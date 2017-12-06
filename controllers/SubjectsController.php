@@ -19,6 +19,11 @@ class SubjectsController extends Controller
 
 	public function create()
 	{
+        if (!App::teacherPermission()) {
+            Session::setFlash("Your access level does not match the required", "danger");
+            Router::redirect("/subjects");
+        }
+
 		if (!empty($_POST)) {
 			$name = $_POST['name'];
 			$description = $_POST['description'];

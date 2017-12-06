@@ -65,6 +65,21 @@ class Model
 		$sql = "UPDATE $this->table_name $setts WHERE id=$id";
 		return $this->db->query($sql);
 	}
+
+	public function count($where_array = array())
+	{
+		if (count($where_array)) {
+			$where = "WHERE ";
+			foreach ($where_array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key='$value' AND ";
+			}
+			$where = substr($where, 0, -4);
+		}
+
+		$sql = "SELECT COUNT(*) FROM $this->table_name $where";
+		return $this->db->query($sql)[0]["COUNT(*)"];
+	}
 }
 
 ?>

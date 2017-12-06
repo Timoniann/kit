@@ -6,15 +6,17 @@
 	<button type="submit">Search</button>
 </form>
 
-<hr>
-<br>
-<br>
 
-<a href="/news/create" class="float-right">
-	<button type="button" class="btn btn-outline-primary">
-		Створити новину
-	</button>
-</a>
+<?php if (App::adminPermission()) { ?>
+
+    <a href="/news/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Створити новину
+		</button>
+	</a>
+
+<?php } ?>
+
 <br><br>
 <div class="row">
 

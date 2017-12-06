@@ -4,7 +4,10 @@ class TestsController extends Controller
 {
 	public function init()
 	{
-		
+        if (!App::teacherPermission()) {
+            Session::setFlash("Your access level does not match the required", "danger");
+            Router::redirect("/trainings");
+        }
 	}
 
 	public function create()

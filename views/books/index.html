@@ -1,12 +1,15 @@
 <h2>Книгарня</h2>
 
-<a href="/books/create" class="float-right">
-	<button type="button" class="btn btn-outline-primary">
-		Create book
-	</button>
-</a>
+<?php
+	if (App::teacherPermission()) { ?>
+		<a href="/books/create" class="float-right">
+			<button type="button" class="btn btn-outline-primary">
+				Create book
+			</button>
+		</a>
 <br><br>
 
+<?php } ?>
 
 <table class="table text-center">
 
