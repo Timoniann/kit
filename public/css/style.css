@@ -157,5 +157,15 @@ margin-bottom: :20px;
   /*border-right: 1px solid #ddd;*/
   padding-right: 15px;
 }
-
-
+/* newscontent */
+.newscontent{
+  margin: 20px;
+}
+.newsform{
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+.newsdate{
+  font-size: 14px;
+}

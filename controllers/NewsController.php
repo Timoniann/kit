@@ -46,12 +46,16 @@ class NewsController extends Controller
 
     public function view()
     {
+        if (count($this->params)) {
 
-    	if (count($this->params)) {
-    		$this->data['news'] = $this->table->getById((int)$this->params[0])[0];
-    	}
+            $this->data['news'] = $this->table->getById((int)$this->params[0])[0];
+
+            $users_table = new Users();
+            $this->data['user'] = $users_table->get(array('id' => $this->data['news']['user_id']))[0];
+        }
     }
-    function search_news(){
+
+    public function search_news(){
 
         $this->params;
         $this->data['params'] = $this->params;
