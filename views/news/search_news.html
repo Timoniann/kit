@@ -1,0 +1,11 @@
+<br>
+<h3>Search news</h3>
+<br>
+News: <br>
+<?php
+
+	foreach ($data['news'] as $news) {
+		echo "<a href='/news/view/" . $news['id'] . "'>" . $news['title'] . " " . "</a><br>";
+}
+
+?>
