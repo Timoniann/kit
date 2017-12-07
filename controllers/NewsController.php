@@ -22,6 +22,7 @@ class NewsController extends Controller
                 $search = $_GET['search'];
             }
         }
+        if($page < 1) $page = 1;
         $page -= 1;
 
         $limit_count = 10;

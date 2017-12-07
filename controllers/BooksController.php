@@ -55,10 +55,27 @@ class BooksController extends Controller
 
 	public function index()
 	{
-		$this->data["books"] = $this->table->getAll();
+		if (!empty($_GET)) {
+			if (isset($_GET['search_by_author'])) {
+				$this->data["books"] = $this->table->getLike(array('author' => $_GET['search_by_author']));
+			} elseif (isset($_GET['search_by_name'])) {
+				$this->data["books"] = $this->table->getLike(array('title' => $_GET['search_by_name']));
+			} elseif (isset($_GET['search_by_subject'])) {
+
+				$subjects_table = new Subjects();
+				$subjects = $subjects_table->getLike(array('name' =>$_GET['search_by_subject']));
+				
+				$this->data['books'] = array();
+				foreach ($subjects as $subject) {
+					$search_array = $this->table->get(array('subject_id' => $subject['id']));
+					$this->data['books'] = array_merge($this->data['books'], $search_array);
+				}
+			} else 
+				$this->data["books"] = $this->table->getAll();
+		} else
+			$this->data["books"] = $this->table->getAll();
+		
 	}
-
-
 }
 
 ?>

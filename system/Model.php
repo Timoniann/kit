@@ -23,16 +23,33 @@ class Model
 
 	public function get($array)
 	{
-		$where = "WHERE ";
+		$where = "";
 		if (count($array)) {
+			$where = "WHERE ";
 			foreach ($array as $key => $value) {
 				$value = $this->db->escape($value);
 				$where .= " $key='$value' AND ";
 			}
 			$where = substr($where, 0, -4);
-		} else return;
+		}
 
 		$sql = "SELECT * FROM $this->table_name $where";
+
+		return $this->db->query($sql);
+	}
+
+	public function getLike($where_array = array(), $addition = '')
+	{
+		$where = "WHERE ";
+		if (count($where_array)) {
+			foreach ($where_array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key LIKE '%$value%' AND ";
+			}
+			$where = substr($where, 0, -4);
+		}
+
+		$sql = "SELECT * FROM $this->table_name $where $addition";
 
 		return $this->db->query($sql);
 	}
