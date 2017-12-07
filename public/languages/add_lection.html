@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+
+    <title>KIT</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="jumbotron.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+  <div class="header">
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <a class="navbar-brand" href="index.html">KIT</a>
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="index.html">Home</a>
+                  <li class="nav-item">
+            <a class="nav-link" href="lection.html">Lection</a>
+                        </li>
+                  <li class="nav-item">
+            <a class="nav-link" href="library.html">Library</a>
+                        </li>
+                  <li class="nav-item">
+            <a class="nav-link" href="login.html">Login</a>
+                        </li>
+                  <li class="nav-item">
+            <a class="nav-link" href="profile.html">Profile</a>
+                        </li>
+                  <li class="nav-item">
+            <a class="nav-link" href="testing.html">Testing</a>
+                        </li>
+                  <li class="nav-item">
+            <a class="nav-link" href="contacts.html">Contacts</a>
+          </li>
+        </ul>
+      </nav>
+  </div>
+
+<form action="" method="post">
+      <div>
+        <textarea id="example" style="height:300px;width:600px;">[center][size=3][b]BBCode SCEditor[/b][/size][/center]
+
+Give it a try! :)
+
+[color=#ff00]Red text! [/color][color=#3399ff]Blue?[/color]
+
+[ul][li]A simple list[/li][li]list item 2[/li][/ul]
+
+If you are using IE9+ or any non-IE browser just type [b]:[/b]) and it should be converted into :) as you type.</textarea>
+
+        <p>If you are using IE9+ or any other browser then it should automatically replace
+          :) and other emoticon codes with theit emoticon images.</p>
+      </div>
+
+      <div>
+        <label for="theme">Theme:</label>
+        <select id="theme">
+          <option value="default">Default</option>
+          <option value="defaultdark">Default dark</option>
+          <option value="modern">Modern</option>
+          <option value="office-toolbar">Office Toolbar</option>
+          <option value="office">Office</option>
+          <option value="square">Square</option>
+        </select>
+      </div>
+    </form>
+
+  <footer>
+      <p>&copy; Company 2017</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')</script>
+    <script src="js/vendor/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/themes/default.min.css" id="theme-style" />
+      
+    <script src="js/minified/sceditor.min.js"></script>
+    <script src="js/minified/icons/monocons.js"></script>
+    <script src="js/minified/formats/bbcode.js"></script>
+<script>
+      var textarea = document.getElementById('example');
+      sceditor.create(textarea, {
+        format: 'bbcode',
+        icons: 'monocons',
+        style: '../minified/themes/content/default.min.css'
+      });
+
+
+      var themeInput = document.getElementById('theme');
+      themeInput.onchange = function() {
+        var theme = '../minified/themes/' + themeInput.value + '.min.css';
+
+        document.getElementById('theme-style').href = theme;
+      };
+    </script>
+
+    
+  </body>
+</html>
