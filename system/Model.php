@@ -68,6 +68,7 @@ class Model
 
 	public function count($where_array = array())
 	{
+		$where = "";
 		if (count($where_array)) {
 			$where = "WHERE ";
 			foreach ($where_array as $key => $value) {
