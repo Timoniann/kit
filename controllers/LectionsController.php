@@ -52,6 +52,11 @@ class LectionsController extends Controller
 
 		Router::redirectToBack();
 	}
+
+	public function add_lection()
+	{
+		
+	}
 }
 
 ?>
