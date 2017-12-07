@@ -1,19 +1,62 @@
-<div class="col-md-6">
+<div class="col-md-12">
 	<div class="panel with-nav-tabs panel-default">
 		<ul class="nav nav-tabs" role="tablist">
 		<?php 
 			$count = 0;
 			foreach ($data['lections'] as $lection) { ?>
 			<li class="nav-item">
-				<a class="nav-link" href="#id<?=$count++;?>" role="tab" data-toggle="tab"><?=$lection['title'];?></a>
+				<a class="nav-link" href="#lection<?=$count++;?>" role="tab" data-toggle="tab"><?=$lection['title'];?></a>
 			</li>
 		<?php } $count = 0; ?>
+		<?php 
+			foreach ($data['tests'] as $test) { ?>
+			<li class="nav-item">
+				<a class="nav-link" href="#test<?=$count++;?>" role="tab" data-toggle="tab"><?=$test['title'];?></a>
+			</li>
+			<?php } $count = 0; ?>
 		</ul>
 
+		<!-- Lections container -->
 		<div class="tab-content">
 		<?php foreach ($data['lections'] as $lection) { ?>
-			<div role="tabpanel" class="tab-pane fade" id="id<?=$count++;?>"><?=$lection['content'];?></div>
-		<?php } ?>
+			<div role="tabpanel" class="tab-pane fade" id="lection<?=$count++;?>">
+				<?=$lection['content'];?>
+			</div>
+		<?php } $count = 0; ?>
+
+		<!-- Tests container -->
+			<?php foreach ($data['tests'] as $test) { ?>
+				<div role="tabpanel" class="tab-pane fade" id="test<?=$count++;?>">
+
+					<form action="/trainings/check_tests" method="post">
+						<input type="hidden" name="test_id" value="<?=$test['id']?>">
+						<?php
+							if(isset($test['questions']))
+							foreach ($test['questions'] as $question) { ?>
+								<div class="test shadowbox white" >
+									<div class="form-check form-group">
+										<h4> Question: <?=$question['question']?></h4>
+
+											<?php foreach ($question['variants'] as $variant) { ?>
+												<label class="custom-control custom-radio">
+												    <input name="<?=$question['id']?>" type="radio" class="custom-control-input" value='<?=$variant?>' checked>
+												    <span class="custom-control-indicator"></span>
+												    <span class="custom-control-description"><?=$variant?></span>
+												</label><br>
+											<?php } ?>
+
+									</div>
+								</div> <br>
+						<?php }?>
+						<a href="/trainings/create" class="float-right">
+							<button type="submit" class="btn btn-outline-primary">
+								Check out
+							</button>
+						</a>
+					</form>
+
+				</div>
+			<?php } $count = 0; ?>
 		</div>
 	</div>
 </div>
