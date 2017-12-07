@@ -27,8 +27,10 @@
 				if(isset($path_parts[$current]) && $path_parts[$current]){
 					$this->action = strtolower($path_parts[$current++]);
 				}
+				if (isset($path_parts[$current])) {
+					$this->params = array_slice($path_parts, $current);
+				}
 				
-				$this->params = $path_parts;
 			}
 		}
 
@@ -65,11 +67,13 @@
 		public static function redirectToBack()
 		{
 			header('Location: ' . $_SERVER['HTTP_REFERER']);
+			exit();
 		}
 
 		public static function redirect($path)
 		{
 			header("Location: $path");
+			exit();
 		}
 	}
 

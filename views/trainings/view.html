@@ -1,0 +1,34 @@
+<?php
+
+if (App::adminPermission() || (App::teacherPermission() && ($data['training']['user_id'] == $data['current_user']['id']))) { ?>
+    <a href="/trainings/edit/<?=$data['training']['id']?>" class="float-right">
+        <button type="button" class="btn btn-outline-primary">
+            Редагувати тренінг
+        </button>
+    </a>
+
+<?php } ?>
+
+
+Training name: 
+	<h2>
+		<?=$data['training']['name'];?>
+	</h2>
+Access: 
+	<h3>
+		<?=$data['training']['private'] ? "Private" : "Public";?>
+	</h3>
+Author: 
+	<h4> 
+		<a href='/users/view/<?=$data['user']['id'];?>'>
+			<?=$data['user']['first_name'] . " " . $data['user']['last_name'];?>
+		</a>
+	</h4>
+Lections count:<br>
+    <h3>
+        <?=$data['lections_count'];?>
+    </h3>
+Tests count: 
+    <h3>
+        <?=$data['tests_count'];?>
+    </h3>

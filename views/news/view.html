@@ -1,0 +1,19 @@
+<div class="col-md-12">
+    <div class="newsform">
+            <legend>
+                <?php
+                    echo $data['news']['title'];
+                ?>
+            </legend>
+            <div class="newscontent">
+                <?php
+                    echo $data['news']['content'];
+                ?>
+            </div>
+        <div class="newsdate">
+            <hr>
+            <?php echo "Автор: ". $data['user']['first_name']." ".$data['user']['last_name']. " | ";?>
+            <?php echo " Дата створення: ".$data['news']['date']."  ";?>
+        </div>
+    </div>
+</div>

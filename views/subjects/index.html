@@ -1,0 +1,44 @@
+<h3>Список предметів</h3>
+
+<?php
+
+if (App::teacherPermission()) { ?>
+	<a href="/subjects/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Create subject
+		</button>
+	</a>
+<?php } ?>
+
+
+
+
+<br><br>
+
+<table class="table text-center">
+
+	<thead class="thead-inverse">
+		<tr>
+			<th>Назва предмету</th>
+			<th>Короткий опис</th>
+		</tr>
+	</thead>
+
+	<tbody>
+		<?php
+
+			foreach ($data['subjects'] as $subject) { ?>
+				<tr>
+					<td>
+						<a href='/subjects/view/<?=$subject['id'];?>'>
+							<?=$subject["name"];?>
+						</a>
+					</td>
+					<td>
+						<?=$subject['description'];?>
+					</td>
+				</tr>
+			<?php } ?>
+	</tbody>
+
+</table>

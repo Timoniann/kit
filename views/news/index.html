@@ -1,42 +1,97 @@
-<h2> News </h2>
+<h2> Новини </h2><br>
 
+<h3>Пошук новин</h3>
+<form method="get" action="" class="form">
+	<div class="input-group">
+		<input class="form-control" type="text" name="search" size="140">
+		<span class="input-group-btn">
+			<button type="submit" class="btn btn-outline-primary">
+				Шукати
+			</button>
+		</span>
+	</div>
+</form>
+<br>
+
+
+<?php if (App::adminPermission()) { ?>
+
+    <a href="/news/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Створити новину
+		</button>
+	</a>
+
+<?php } ?>
+
+<br><br>
 <div class="row">
 
+
 <?php 
+	$hours = (int)date("h");
+	$night = $hours < 6 || $hours > 22 ? true : false;	
+
 	foreach ($data['news'] as $post) {
 		?>
-
 		<div class="col-md-4">
-			<div class="news">
+			<div class="shadowbox <?=($night ? 'dark' : 'white')?>">
 				<div class="ntitle">
 					<h2><?=$post['title'] ?></h2>
 				</div>
 				<div class="ntext">
-					<p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+					<?=mb_strimwidth(strip_tags(htmlspecialchars_decode($post['content'])), 0, 150, "..."); ?>
 				</div>
 				<div class="nbutton">
-					<p><a class="btn btn-secondary" href="#" role="button">Browse</a></p>
+					<p><a href="/news/view/<?=$post['id'] ?>"><button class="btn btn-secondary float-right">Details</button></a></p>
 				</div>
 			</div>
 		</div>
 		<?php } ?>
 </div>
+</div>
 <div class="row">
 	<div class="col-md-12">
 		<div class="paginator">
 			<nav aria-label="Page navigation example">
-				<ul class="pagination justify-content-center">
-					<li class="page-item disabled">
-						<a class="page-link" href="#" tabindex="-1">Previous</a>
-					</li>
-					<li class="page-item"><a class="page-link" href="#">1</a></li>
-					<li class="page-item"><a class="page-link" href="#">2</a></li>
-					<li class="page-item"><a class="page-link" href="#">3</a></li>
-					<li class="page-item">
-						<a class="page-link" href="#">Next</a>
-					</li>
-				</ul>
+				<form method="get" action="">
+
+					<input type="hidden" name="search" value="<?=$data['search']?>">
+
+					<ul class="pagination justify-content-center">
+
+						<li class="page-item <?=($data['page_index'] <= 1 ? "disabled" : "")?>">
+							<button class="page-link" type="submit" value="<?=($data['page_index'] - 1)?>" name="page">Previous</button>
+						</li>
+
+						<?php
+						for ($i=$data['page_index'] - 4; $i < $data['page_index']; $i++) { 
+							if ($i < 1) continue; ?>
+							<li class="page-item">
+								<button class="page-link" type="submit" value="<?=($i)?>" name="page"><?=($i)?></button>
+							</li>
+							<?php } ?>
+
+							<li class="page-item active">
+								<label class="page-link disabled"><?=$data['page_index']?></label>
+							</li>
+
+						<?php
+
+						for ($i=$data['page_index'] + 1; $i < $data['page_index'] + 4; $i++) { 
+							if ($i > $data['max_page']) break; ?>
+							<li class="page-item">
+								<button class="page-link" type="submit" value="<?=($i)?>" name="page"><?=($i)?></button>
+							</li>
+						<?php } ?>
+
+							<li class="page-item <?=($data['page_index'] < $data['max_page'] ? "" : "disabled")?>">
+								<button class="page-link" type="submit" value="<?=($data['page_index'] + 1)?>" name="page">Next</button>
+							</li>
+					</ul>
+				</form>	
 			</nav>
 		</div>
 	</div>
 </div>
+

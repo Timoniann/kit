@@ -1,0 +1,185 @@
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="shadowbox" style="background-color: #fff">
+        	<h2>Мій профіль</h2>
+        	<a href="/profile/edit" class="float-right">
+				<button type="button" class="btn btn-outline-primary">
+					Редагувати
+				</button>
+			</a>
+			<div class="form-group" style="width: 100%; height: 200px;">
+				<img style="padding: 10px" width="200px" height="200px" class='rounded mx-auto d-block float-left' src='<?=($data['user']['avatar']) ? "/uploads/avatars/{$data['user']['avatar']}" : "/public/images/avatar.png";?>'>
+				<h3><?=$data['user']['first_name'] . ' ' . $data['user']['last_name'];?></h3>
+				<div class="status">Here will be a status</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<h4>Activity</h4>
+				<div class="input-group">
+					<div class="panel with-nav-tabs panel-default">
+						<ul class="nav nav-tabs" role="tablist">
+
+							<li class="nav-item">
+								<a class="nav-link" href="#trainings" role="tab" data-toggle="tab">Trainings</a>
+							</li>
+
+							<?php if (App::teacherPermission()) { ?>
+
+								<li class="nav-item">
+									<a class="nav-link" href="#books" role="tab" data-toggle="tab">Uploaded Books</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link" href="#created_trainings" role="tab" data-toggle="tab">Created Trainings</a>
+								</li>
+
+							<?php } ?>
+							
+						</ul>
+
+						<div class="tab-content">
+							<div role="tabpanel" class="tab-pane fade" id="trainings">
+								<table class="table">
+										<thead class="thead-inverse">
+											<tr>
+												<th>Назва навчання</th>
+												<th>Прогрес</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach ($data['trainings'] as $training) { ?>
+												<tr>
+													<td>
+														<a href='/trainings/view/<?=$training['id'];?>'>
+															<?=$training['name'];?>
+														</a>
+													</td>
+													<td>
+														<?=$training['progress'];?>
+													</td>
+													<td>
+														<a href='/trainings/study/<?=$training['id']?>'>
+															<button type="button" class="btn btn-outline-success">
+																Вчити
+															</button>
+														</a>
+													</td>
+												</tr>
+											<?php } ?>
+										</tbody>
+								</table>
+							</div>
+
+							<?php if (App::teacherPermission()) { ?>
+
+							<div role="tabpanel" class="tab-pane fade" id="books">
+								<table class="table">
+										<thead class="thead-inverse">
+											<tr>
+												<th>Назва книги</th>
+												<th>Опис</th>
+												<th>Автор</th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach ($data['books'] as $book) { ?>
+												<tr>
+													<td>
+														<a href='/books/view/<?=$book['id'];?>'>
+															<?=$book['title'];?>
+														</a>
+													</td>
+													<td>
+														<?=mb_strimwidth(strip_tags(htmlspecialchars_decode($book['description'])), 0, 50, "..."); ?>
+													</td>
+													<td>
+														<?=$book['author'];?>
+													</td>
+												</tr>
+											<?php } ?>
+										</tbody>
+								</table>
+							</div>
+
+							<div role="tabpanel" class="tab-pane fade" id="created_trainings">
+								<table class="table">
+										<thead class="thead-inverse">
+											<tr>
+												<th>Назва навчання</th>
+												<th>Тип</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody>
+											<?php foreach ($data['user_trainings'] as $training) { ?>
+												<tr>
+													<td>
+														<a href='/trainings/view/<?=$training['id'];?>'>
+															<?=$training['name'];?>
+														</a>
+													</td>
+													<td>
+														<?=($training['private'] ? "Private" : "Public");?>
+													</td>
+													<td>
+														<a href='/trainings/edit/<?=$training['id']?>'>
+															<button type="button" class="btn btn-outline-warning">
+																Редагувати
+															</button>
+														</a>
+													</td>
+												</tr>
+											<?php } ?>
+										</tbody>
+								</table>
+							</div>
+
+							<?php } ?>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<h4>About</h4>
+				<div class="input-group">
+					<?=$data['user']['about']?>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<h4>City</h4>
+				<div class="input-group">
+					<?=$data['user']['city']?>
+				</div>
+			</div>
+
+			<hr>
+
+			<div class="form-group">
+				<h4>Workplace</h4>
+				<div class="input-group">
+					<?=$data['user']['workplace']?>
+				</div>
+			</div>
+
+			<hr>
+			
+			<div class="form-group">
+				<h4>Registration date</h4>
+				<div class="input-group">
+					<?=$data['user']['registration_date']?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
