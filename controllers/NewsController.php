@@ -11,17 +11,30 @@ class NewsController extends Controller
 
     public function index()
     {
-        $news = $this->table->getAll();
-        $this->data['news'] = $news;
-        
-        if(!empty ($_POST)){
+        $page = 1;
+        $search = "";
 
-            if(isset($_POST['search_news'])){
-
-                Router::redirect("/news/search_news/".$_POST['search_news']);
+        if (!empty($_GET)) {
+            if (isset($_GET['page'])) {
+                $page = (int)$_GET['page'];
             }
-
+            if (isset($_GET['search'])) {
+                $search = $_GET['search'];
+            }
         }
+        if($page < 1) $page = 1;
+        $page -= 1;
+
+        $limit_count = 10;
+
+        $news = $this->table->search_news($search, "ORDER BY id DESC LIMIT $limit_count OFFSET " . $limit_count * $page);
+
+        $this->data['news'] = $news;
+        $news_count = $this->table->search_count($search);
+        $this->data['page_limit'] = $limit_count;
+        $this->data['page_index'] = $page + 1;
+        $this->data['max_page'] = (int)($news_count / $limit_count) + 1;
+        $this->data['search'] = $search;
 
     }
 
@@ -53,15 +66,6 @@ class NewsController extends Controller
             $users_table = new Users();
             $this->data['user'] = $users_table->get(array('id' => $this->data['news']['user_id']))[0];
         }
-    }
-
-    public function search_news(){
-
-        $this->params;
-        $this->data['params'] = $this->params;
-        $news_table = new News();
-        $this->data['news'] = $news_table->search_news(array_pop($this->params));
-
     }
 }
 
