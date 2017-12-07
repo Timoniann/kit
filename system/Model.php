@@ -21,6 +21,39 @@ class Model
 		return $this->db->query($sql);
 	}
 
+	public function get($array)
+	{
+		$where = "";
+		if (count($array)) {
+			$where = "WHERE ";
+			foreach ($array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key='$value' AND ";
+			}
+			$where = substr($where, 0, -4);
+		}
+
+		$sql = "SELECT * FROM $this->table_name $where";
+
+		return $this->db->query($sql);
+	}
+
+	public function getLike($where_array = array(), $addition = '')
+	{
+		$where = "WHERE ";
+		if (count($where_array)) {
+			foreach ($where_array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key LIKE '%$value%' AND ";
+			}
+			$where = substr($where, 0, -4);
+		}
+
+		$sql = "SELECT * FROM $this->table_name $where $addition";
+
+		return $this->db->query($sql);
+	}
+
 	public function deleteById($id)
 	{
 		$id = (int)$id;
@@ -34,6 +67,37 @@ class Model
 		return $this->db->query($sql);
 	}
 
+	public function update($id, $array)
+	{
+		$id = (int)$id;
+		$setts = "SET ";
+		if (count($array)) {
+			foreach ($array as $key => $value) {
+				$value = $this->db->escape($value);
+				$setts .= " $key='$value', ";
+			}
+			$setts = substr($setts, 0, -2);
+		} else return;
+
+		$sql = "UPDATE $this->table_name $setts WHERE id=$id";
+		return $this->db->query($sql);
+	}
+
+	public function count($where_array = array())
+	{
+		$where = "";
+		if (count($where_array)) {
+			$where = "WHERE ";
+			foreach ($where_array as $key => $value) {
+				$value = $this->db->escape($value);
+				$where .= " $key='$value' AND ";
+			}
+			$where = substr($where, 0, -4);
+		}
+
+		$sql = "SELECT COUNT(*) FROM $this->table_name $where";
+		return $this->db->query($sql)[0]["COUNT(*)"];
+	}
 }
 
 ?>

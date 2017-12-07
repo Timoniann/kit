@@ -1,0 +1,68 @@
+<h2>Дистанційне навчання</h2>
+
+<?php
+
+if (App::teacherPermission()) { ?>
+    <a href="/trainings/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Create training
+		</button>
+	</a>
+<?php } ?>
+
+
+<br><br>
+
+<table class="table text-center">
+	<thead class="thead-inverse">
+		<tr>
+			<th>Дисципліна</th>
+			<th>Назва курсу</th>
+			<th>Викладач</th>
+			<th><!-- Тривалість курсу --></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php
+			foreach ($data['trainings'] as $training) {
+				?>
+				<tr>
+					<td>
+						<a href='/subjects/view/<?=$training['subject_id'];?>'>
+ 							<?=$training['subject_name'];?>
+						</a>
+					</td>
+					<td>
+						<a href='/trainings/view/<?=$training['id'];?>'>
+							<?=$training["name"];?>
+						</a>
+					</td>
+					<td>
+						<a href='/users/view/<?=$training['user_id'];?>'>
+							<?=$training['user_name'];?>
+						</a>
+					</td>
+					<?php if($training['in_progress']) { ?> 
+						<td>
+							<a href='/trainings/study/<?=$training['id'];?>'>
+								<button type='button' class='btn btn-outline-success'>
+									Продовжити навчання
+								</button>
+							</a>
+						<td>
+							<?php } else {?>
+						<td>
+							<a href='/trainings/entry/<?=$training['id'];?>'>
+								<button type='button' style='float:center' class='btn btn-outline-warning center '>
+									Записатися
+								</button>
+							</a>
+						<td>
+					<?php } ?>
+				</tr>
+				<?php
+			}
+		?>
+	</tbody>
+
+</table>

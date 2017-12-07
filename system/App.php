@@ -33,7 +33,6 @@
 			if (method_exists($controller_object, $controller_method)) {
 
 				$view_path = $controller_object->$controller_method();
-
 				$view_object = new View($controller_object->getData(), $view_path);
 				$content = $view_object->render();
 			} else{
@@ -48,5 +47,31 @@
 			$layout_view_object = new View(compact("content"), $layout_path);
 			echo $layout_view_object->render();
 		}
+
+		public static function adminPermission()
+		{
+			$user = Session::getCurrentUser();
+			if (!$user || $user['access'] < 2)
+				return false;
+			return true;
+		}
+
+		public static function teacherPermission()
+		{
+			$user = Session::getCurrentUser();
+			if (!$user || $user['access'] < 1)
+				return false;
+			return true;
+		}
+
+		// Joke)
+		public static function superAdminPermission()
+		{
+			$user = Session::getCurrentUser();
+			if (!$user || $user['first_name'] != "Timoniann")
+				return false;
+			return true;
+		}
+
 	}
 ?>

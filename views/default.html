@@ -2,7 +2,7 @@
 <html lang="ua">
 <head>
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="">
 	<meta name="author" content="Timoniann">
 	<link rel="icon" href="favicon.ico">
@@ -10,6 +10,7 @@
 	<title><?=Config::get("site_name")?></title>
 
 	<link href="/css/bootstrap.min.css" rel="stylesheet">
+
 	<link href="/css/style.css" rel="stylesheet">
 
 </head>
@@ -19,43 +20,78 @@
 	<div class="header">
 	<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="/"><?=Config::get("site_name")?></a>
-			<ul class="navbar-nav mr-auto">
-			<li class="nav-item active">
-				<a class="nav-link" href="/">Home</a>
-			</li>
+			 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+			    <span class="navbar-toggler-icon"></span>
+			</button>
 
-			<?php
-				$user = Session::getCurrentUser();
-				if($user){
-
-					?>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users">Profile</a>
-						</li>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users/logout">Logout</a>
-						</li>
+			<div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
+						<a class="nav-link" href="/">Home</a>
+					</li>
 
 					<?php
+						$user = Session::getCurrentUser();
+						if($user){
 
-				} else {
+							?>
+
+								<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
+									<a class="nav-link" href="/news">News</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link <?= App::getRouter()->getController() == "users" ? "active" : "" ?>" href="/users">Users</a>
+								</li>
+
+								<li class="nav-item">
+									<a class="nav-link <?= App::getRouter()->getController() == "books" ? "active" : "" ?>" href="/books">Library</a>
+								</li>
+
+								<li class="nav-item <?= App::getRouter()->getController() == "subjects" ? "active" : "" ?>">
+									<a class="nav-link" href="/subjects">Subjects</a>
+								</li>
+
+								<li class="nav-item <?= App::getRouter()->getController() == "trainings" ? "active" : "" ?>">
+									<a class="nav-link" href="/trainings">Trainings</a>
+								</li>
+							<?php
+
+						} else {
+							?>
+
+								<li class="nav-item">
+									<a class="nav-link" href="/contacts">Contacts</a>
+								</li>
+								
+							<?php
+						}
 					?>
-
-						<li class="nav-item">
-							<a class="nav-link" href="/users/auth">Log in</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="/contacts">Contacts</a>
-						</li>
-						
+				</ul>
+				<ul class="navbar-nav">
 					<?php
-				}
-			?>
+						if($user){ ?>
+
+							<li class="nav-item align-right <?= App::getRouter()->getController() == "profile" ? "active" : "" ?>">
+								<a class="nav-link" href="/profile">Profile</a>
+							</li>
 
 			
-			</ul>
+							<li class="nav-item float-right">
+								<a class="nav-link" href="/users/logout">Logout</a>
+							</li>
+
+						<?php }
+						else { ?>
+
+							<li class="nav-item">
+								<a class="nav-link" href="/users/auth">Log in</a>
+							</li>
+
+						<?php }
+					?>
+				</ul>
+			</div>
 		</nav>
 	</div>
 
@@ -64,20 +100,16 @@
 
 			<?php if(Session::hasFlash()) { ?>
 
-				<div class="alert alert-info  alert-dismissible" role="alert">
+				<div class="alert alert-<?=Session::get('type');?> alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert">&times;</button>
 						<!-- <strong>Heads up!</strong> This <a href="https://bootswatch.com/flatly/#" class="alert-link">alert needs your attention</a>, but it's not super important. -->
 					<?php Session::showFlash(); ?>
-		  </div>
+		  		</div>
+	
+			<?php } ?>
 
-		<?php } ?>
-
-			<!-- Example loading pictures  -->
-			<!-- <img width="50" src="/images/avatar.png"> -->
-			
-
-			<!-- Content page -->
 			<?=$data['content']?>
+
 		</div>
 	</div>
 	<footer class="footer">
@@ -85,6 +117,8 @@
 		<span class="text-muted"><p>&copy; PI, 4 course :)</p></span>
 	  </div>
 	</footer>
-
+	<script src="/js/tether.min.js"></script>
+	<script src="/js/jquery-3.2.1.min.js"></script>
+	<script src="/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -1,0 +1,100 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="regform">
+            
+            <legend>Editing profile</legend>
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="exampleInputEmail1">Email address</label>
+                    <div class="input-group">
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required value="<?=$data['user']['email']; ?>">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>
+            
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Password</label>
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Old password" name="old_password" minlength="6" required>
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="New password" name="new_password" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary float-right">Change</button><br>
+                </div>
+            </form>
+            
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="firstName">First name</label>
+                    <input type="text" class="form-control" id="firstName" aria-describedby="emailHelp" placeholder="First name" name="first_name" minlength="2" required value="<?=$data['user']['first_name']; ?>">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last name</label>
+                    <input type="text" class="form-control" id="lastName" placeholder="Last name" name="last_name" minlength="2" required  value="<?=$data['user']['last_name']; ?>">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary float-right">Change</button><br>
+                </div>
+            </form>
+
+            <label for="InputCity">Old Avatar</label>
+            <div class="form-group">
+                <img class="img-fluid" src="/uploads/avatars/<?=$data['user']['avatar']; ?>">
+            <div class="form-group">
+            <form method="post" action="" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="file">New Avatar</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="file" accept=".png,.jpg,.jpeg,.bmp" name="avatar" required>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>
+                
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="InputCity">City</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="InputCity" placeholder="Enter city" name="city" value="<?=$data['user']['city']; ?>">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="InputWorkplace">Workplace</label>
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="InputWorkplace" placeholder="Enter your workplace" name="workplace" value="<?=$data['user']['workplace']; ?>">
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>
+
+
+            <form method="post" action="">
+                <div class="form-group">
+                    <label for="InputAbout">About</label>
+                    <div class="input-group">
+                        <textarea rows="7" class="form-control" id="InputAbout" placeholder="Example: Last time I live in..." name="about"><?=$data['user']['about']; ?></textarea>
+                        <span class="input-group-btn">
+                            <button type="submit" class="btn btn-primary">Change</button><br>
+                        </span>
+                    </div>
+                </div>
+            </form>      
+
+        </div>
+    </div>
+</div>

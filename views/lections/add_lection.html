@@ -1,0 +1,39 @@
+<link rel="stylesheet" href="/css/themes/default.min.css" id="theme-style" />    
+<script src="/js/minified/sceditor.min.js"></script>
+<script src="/js/minified/icons/monocons.js"></script>
+<script src="/js/minified/formats/bbcode.js"></script>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-11">
+      <div class="shadowbox white">
+        <form action="" method="post">
+          <div>
+            <textarea id="example" style="height:500px;width:900px;">[center][size=6][b]Write your lection here[/b][/size][/center]
+            </textarea>
+          </div>
+        </form>
+        <div class="text-right">
+          <button type="submit" class="btn btn-primary" >Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  var textarea = document.getElementById('example');
+  sceditor.create(textarea, {
+    format: 'bbcode',
+    icons: 'monocons',
+    style: '/js/minified/themes/content/default.min.css'
+  });
+
+
+  // var themeInput = document.getElementById('theme');
+  // themeInput.onchange = function() {
+  //   var theme = '/js/minified/themes/' + themeInput.value + '.min.css';
+
+  //   document.getElementById('theme-style').href = theme;
+  // };
+</script>
