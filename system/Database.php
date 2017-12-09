@@ -49,6 +49,12 @@ class Database
 	{
 		return $this->connection->error;
 	}
+
+	public function getConnection()
+	{
+		return $this->connection;
+	}
+
 }
 
 ?>

@@ -40,8 +40,9 @@ class Model
 
 	public function getLike($where_array = array(), $addition = '')
 	{
-		$where = "WHERE ";
+		$where = "";
 		if (count($where_array)) {
+			$where = "WHERE ";
 			foreach ($where_array as $key => $value) {
 				$value = $this->db->escape($value);
 				$where .= " $key LIKE '%$value%' AND ";
@@ -98,6 +99,12 @@ class Model
 		$sql = "SELECT COUNT(*) FROM $this->table_name $where";
 		return $this->db->query($sql)[0]["COUNT(*)"];
 	}
+
+	public function getLastId()
+	{
+		return $this->db->getConnection()->insert_id;
+	}
+
 }
 
 ?>

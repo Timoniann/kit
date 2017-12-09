@@ -55,24 +55,46 @@ class TrainingsController extends Controller
 
 	public function view()
 	{
-		if($this->params && count($this->params)){
-			$id = (int)$this->params[0];
-			$trainings = $this->table->getById($id);
-			if (count($trainings)) {
-				$this->data['training'] = $trainings[0];
-				$users_table = new Users();
-				$user = $users_table->getbyId($trainings[0]['user_id']);
-				$this->data['user'] = $user[0];
-				$this->data['user'];
+		if(!($this->params && count($this->params)))
+			Router::redirect('/trainings');
 
-				$this->data['current_user'] = Session::getCurrentUser();
+		$users_table = new Users();
+		$tests_table = new Tests();
+		$lection_table = new Lections();
 
-				$lection_table = new Lections();
-				$this->data['lections_count'] = $lection_table->count(array('training_id' => $id));
+		$id = (int)$this->params[0];
+		$trainings = $this->table->getById($id);
+		if (!count($trainings)) 
+			Router::redirect('/trainings');
 
-				$tests_table = new Tests();
-				$this->data['tests_count'] = $tests_table->count(array('training_id' => $id));
+		$this->data['training'] = $trainings[0];
+		
+		$user = $users_table->getbyId($trainings[0]['user_id']);
+		$this->data['user'] = $user[0];
+		$this->data['user'];
+
+		$this->data['current_user'] = Session::getCurrentUser();
+
+		$this->data['lections_count'] = $lection_table->count(array('training_id' => $id));
+
+		$this->data['tests_count'] = $tests_table->count(array('training_id' => $id));
+	
+
+		if(App::adminPermission() || (App::teacherPermission() && ($data['training']['user_id'] == $data['current_user']['id']))) {
+			$testings_table = new Testings();
+			$tests = $tests_table->get(array('training_id' => $this->data['training']['id']));
+			$testings = array();
+			foreach ($tests as $test) {
+				$new_testings = $testings_table->get(array('test_id' => $test['id']));
+				for ($i=0; $i < count($new_testings); $i++) { 
+					$new_testings[$i]['user'] = $users_table->get(array('id' => $new_testings[$i]['user_id']))[0];
+					$new_testings[$i]['test'] = $test;
+				}
+
+				$testings = array_merge($testings, $new_testings);
 			}
+			$this->data['testings'] = $testings;
+			
 		}
 	}
 
@@ -153,10 +175,15 @@ class TrainingsController extends Controller
 
 	public function study()
 	{
-		if (!$this->params) Router::redirectToBack();
+		$user = Session::getCurrentUser();
 
+		if (!$user || !$this->params) Router::redirectToBack();
+
+		$tests_table = new Tests();
 		$entries_table = new Entries();
+		$testings_table = new Testings();
 		$lections_table = new Lections();
+		$questions_table = new Questions();
 		
 		$entry = $entries_table->get(array('user_id' => Session::getCurrentUser()['id'], 'training_id' => $this->params[0]));
 		if (!count($entry)) {
@@ -169,6 +196,94 @@ class TrainingsController extends Controller
 
 		$this->data['training'] = $this->table->getById($entry['training_id'])[0];
 		$this->data['lections'] = $lections_table->get(array('training_id' => $entry['training_id']));
+
+		$tests = $tests_table->get(array('training_id' => $entry['training_id']));
+
+		$questions = array();
+		for ($i=0; $i < count($tests); $i++) {
+
+			$testings = $testings_table->get(array('user_id' => $user['id'], 'test_id' => $tests[$i]['id']));
+			$tests[$i]['testings'] = $testings;
+
+			$questions = $questions_table->get(array('test_id' => $tests[$i]['id']));
+
+			for ($j=0; $j < count($questions); $j++) { 
+			 	$questions[$j]['variants'] = array(
+			 		$questions[$j]['answer'], 
+			 		$questions[$j]['variant1'],
+			 		$questions[$j]['variant2'],
+			 		$questions[$j]['variant3']
+			 	);
+			}
+			$tests[$i]['questions'] = $questions;
+		}
+
+
+		$this->data['tests'] = $tests;
+	}
+
+	public function check_tests()
+	{
+		$user = Session::getCurrentUser();
+		if (!empty($_POST) && $user) {
+
+			if(isset($_POST['test_id'])){
+
+				$test_id = (int)$_POST['test_id'];
+				$tests_table = new Tests();
+				$test = $tests_table->get(array('id' => $test_id));
+
+				if(count($test)){
+
+					$entries_table = new Entries();
+
+					$test = $test[0];
+					$training = $this->table->get(array('id' => $test['training_id']));
+					$training = $training[0];
+
+					if(count($entries_table->get(array('user_id' => $user['id'], 'training_id' => $training['id'])))){
+						
+						$answers_table = new Answers();
+						$testings_table = new Testings();
+						$questions_table = new Questions();
+
+						$testings_table->add($user['id'], $test['id'], 0, 0);
+						$testingId = $testings_table->getLastId();
+
+						$answers = array();
+
+						$questions = $questions_table->get(array('test_id' => $test['id']));
+
+						$true_count = 0;
+						$false_count = 0;
+
+						foreach ($questions as $question) {
+
+							if (!isset($_POST[$question['id']])) {
+								$testings_table->update($testingId, array('questions_count' => -1, 'answered_count' => -1));
+								Session::setFlash("Not all tests checked!");
+								Router::redirectToBack();
+							}
+
+							if ($question['answer'] == $_POST[$question['id']]) {
+								$answers_table->add($testingId, $question['id'], $_POST[$question['id']], 1);
+								$true_count++;
+							}
+							else {
+								$answers_table->add($testingId, $question['id'], $_POST[$question['id']], 0);
+								$false_count++;
+							}
+						}
+
+						$testings_table->update($testingId, array('questions_count' => $false_count + $true_count, 'answered_count' => $true_count));
+
+						$flash = "Answered: " . $true_count . ", not answered: " . $false_count;
+						Session::setFlash("Test '" . $test['title'] ."': " . "<div style='color:green; display: inline-block;'>Answered: " . $true_count . "</div><div style='color: red; display: inline-block;'>" . ", not answered: " . $false_count . "</div>");
+					}
+				}
+			}
+		}
+		Router::redirectToBack();
 	}
 }
 
