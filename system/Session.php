@@ -21,7 +21,7 @@ class Session
 
 	public static function showFlash()
 	{
-		self::$flash_message = self::$flash_message ? self::$flash_message : get("message");
+		self::$flash_message = self::$flash_message ? self::$flash_message : self::get("message");
 
 		echo self::$flash_message;
 		

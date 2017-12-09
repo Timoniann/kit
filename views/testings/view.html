@@ -1,0 +1,20 @@
+<?php $count = 1; 
+foreach ($data['answers'] as $answer): ?>
+	<div class="shadowbox white">
+		<h4>Question #<?=$count++?>:</h4>
+		<div class="shadowbox" style="font-style: italic;"><?=$answer['question']['question']?></div><br>
+	    User answer: 
+			<div class="shadowbox" style="background-color: <?=($answer['answered'] ? '#00ee22' : '#ff3333')?>">
+	    		<?=$answer['user_answer']?>
+	    	</div>
+
+	    	<?php if(!$answer['answered']) { ?>
+	    	<br>
+	    	True answer: 
+			<div class="shadowbox" style="background-color: #77ee77">
+    			<?=$answer['question']['answer']?>
+	    	</div>
+	    	<?php } ?>
+	</div>
+	<br>
+<?php endforeach ?>
