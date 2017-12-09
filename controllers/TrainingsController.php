@@ -153,11 +153,14 @@ class TrainingsController extends Controller
 
 	public function study()
 	{
-		if (!$this->params) Router::redirectToBack();
+		$user = Session::getCurrentUser();
 
-		$entries_table = new Entries();
-		$lections_table = new Lections();
+		if (!$user || !$this->params) Router::redirectToBack();
+
 		$tests_table = new Tests();
+		$entries_table = new Entries();
+		$testings_table = new Testings();
+		$lections_table = new Lections();
 		$questions_table = new Questions();
 		
 		$entry = $entries_table->get(array('user_id' => Session::getCurrentUser()['id'], 'training_id' => $this->params[0]));
@@ -171,21 +174,26 @@ class TrainingsController extends Controller
 
 		$this->data['training'] = $this->table->getById($entry['training_id'])[0];
 		$this->data['lections'] = $lections_table->get(array('training_id' => $entry['training_id']));
+
 		$tests = $tests_table->get(array('training_id' => $entry['training_id']));
 
 		$questions = array();
 		for ($i=0; $i < count($tests); $i++) {
-			 $questions = $questions_table->get(array('test_id' => $tests[$i]['id']));
 
-			 for ($j=0; $j < count($questions); $j++) { 
+			$testings = $testings_table->get(array('user_id' => $user['id'], 'test_id' => $tests[$i]['id']));
+			$tests[$i]['testings'] = $testings;
+
+			$questions = $questions_table->get(array('test_id' => $tests[$i]['id']));
+
+			for ($j=0; $j < count($questions); $j++) { 
 			 	$questions[$j]['variants'] = array(
 			 		$questions[$j]['answer'], 
 			 		$questions[$j]['variant1'],
 			 		$questions[$j]['variant2'],
 			 		$questions[$j]['variant3']
 			 	);
-			 }
-			 $tests[$i]['questions'] = $questions;
+			}
+			$tests[$i]['questions'] = $questions;
 		}
 
 

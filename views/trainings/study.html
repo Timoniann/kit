@@ -27,7 +27,20 @@
 		<!-- Tests container -->
 			<?php foreach ($data['tests'] as $test) { ?>
 				<div role="tabpanel" class="tab-pane fade" id="test<?=$count++;?>">
-
+					<?php if($test['testings']){ ?>
+					<br>
+						<div class="alert alert-info alert-dismissible" role="alert">
+							<button type="button" class="close" data-dismiss="alert">&times;</button>
+								<strong>Увага!</strong> Ви вже проходили даний тест, результати:<br>
+					  		<?php
+					  		$count = 1;
+							foreach ($test['testings'] as $testing) { ?>
+								<a href='/testings/view/<?=$testing['id']?>'>Спроба <?=$count++;?>.</a> Правильних відповідей: <?=$testing['answered_count']?>
+								з <?=$testing['questions_count']?><br>
+							<?php } $count = 0; ?>
+						</div>
+					<br>
+					<?php } ?>
 					<form action="/trainings/check_tests" method="post">
 						<input type="hidden" name="test_id" value="<?=$test['id']?>">
 						<?php
@@ -47,12 +60,14 @@
 
 									</div>
 								</div> <br>
-						<?php }?>
+						<?php } if (isset($test['questions']) && count($test['questions'])) { ?>
 						<a href="/trainings/create" class="float-right">
 							<button type="submit" class="btn btn-outline-primary">
 								Check out
 							</button>
 						</a>
+						<?php } ?>
+						<br>
 					</form>
 
 				</div>
