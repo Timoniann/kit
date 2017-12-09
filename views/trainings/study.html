@@ -33,11 +33,11 @@
 							<button type="button" class="close" data-dismiss="alert">&times;</button>
 								<strong>Увага!</strong> Ви вже проходили даний тест, результати:<br>
 					  		<?php
-					  		$count = 1;
+					  		$count_tries = 1;
 							foreach ($test['testings'] as $testing) { ?>
-								<a href='/testings/view/<?=$testing['id']?>'>Спроба <?=$count++;?>.</a> Правильних відповідей: <?=$testing['answered_count']?>
+								<a href='/testings/view/<?=$testing['id']?>'>Спроба <?=$count_tries++;?>.</a> Правильних відповідей: <?=$testing['answered_count']?>
 								з <?=$testing['questions_count']?><br>
-							<?php } $count = 0; ?>
+							<?php } $count_tries = 0; ?>
 						</div>
 					<br>
 					<?php } ?>

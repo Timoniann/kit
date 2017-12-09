@@ -55,24 +55,46 @@ class TrainingsController extends Controller
 
 	public function view()
 	{
-		if($this->params && count($this->params)){
-			$id = (int)$this->params[0];
-			$trainings = $this->table->getById($id);
-			if (count($trainings)) {
-				$this->data['training'] = $trainings[0];
-				$users_table = new Users();
-				$user = $users_table->getbyId($trainings[0]['user_id']);
-				$this->data['user'] = $user[0];
-				$this->data['user'];
+		if(!($this->params && count($this->params)))
+			Router::redirect('/trainings');
 
-				$this->data['current_user'] = Session::getCurrentUser();
+		$users_table = new Users();
+		$tests_table = new Tests();
+		$lection_table = new Lections();
 
-				$lection_table = new Lections();
-				$this->data['lections_count'] = $lection_table->count(array('training_id' => $id));
+		$id = (int)$this->params[0];
+		$trainings = $this->table->getById($id);
+		if (!count($trainings)) 
+			Router::redirect('/trainings');
 
-				$tests_table = new Tests();
-				$this->data['tests_count'] = $tests_table->count(array('training_id' => $id));
+		$this->data['training'] = $trainings[0];
+		
+		$user = $users_table->getbyId($trainings[0]['user_id']);
+		$this->data['user'] = $user[0];
+		$this->data['user'];
+
+		$this->data['current_user'] = Session::getCurrentUser();
+
+		$this->data['lections_count'] = $lection_table->count(array('training_id' => $id));
+
+		$this->data['tests_count'] = $tests_table->count(array('training_id' => $id));
+	
+
+		if(App::adminPermission() || (App::teacherPermission() && ($data['training']['user_id'] == $data['current_user']['id']))) {
+			$testings_table = new Testings();
+			$tests = $tests_table->get(array('training_id' => $this->data['training']['id']));
+			$testings = array();
+			foreach ($tests as $test) {
+				$new_testings = $testings_table->get(array('test_id' => $test['id']));
+				for ($i=0; $i < count($new_testings); $i++) { 
+					$new_testings[$i]['user'] = $users_table->get(array('id' => $new_testings[$i]['user_id']))[0];
+					$new_testings[$i]['test'] = $test;
+				}
+
+				$testings = array_merge($testings, $new_testings);
 			}
+			$this->data['testings'] = $testings;
+			
 		}
 	}
 
