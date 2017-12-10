@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1
--- Время создания: Дек 09 2017 г., 17:57
+-- Время создания: Дек 10 2017 г., 23:01
 -- Версия сервера: 5.7.14
 -- Версия PHP: 5.6.25
 
@@ -121,7 +121,35 @@ INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) VALUE
 (6, 3, 3, '2017-12-05 12:06:18', 0),
 (7, 2, 7, '2017-12-07 16:02:39', 0),
 (8, 2, 3, '2017-12-08 02:24:35', 0),
-(9, 3, 4, '2017-12-09 19:49:32', 0);
+(9, 3, 4, '2017-12-09 19:49:32', 0),
+(10, 3, 4, '2017-12-11 00:43:45', 0),
+(11, 3, 3, '2017-12-11 00:58:34', 0),
+(12, 3, 7, '2017-12-11 00:59:35', 0),
+(13, 3, 2, '2017-12-11 01:00:15', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `invites`
+--
+
+CREATE TABLE `invites` (
+  `id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `training_id` int(11) NOT NULL,
+  `status` int(3) NOT NULL DEFAULT '0',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '0 - waining, 1 - accepted, 2 - not accepted'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `invites`
+--
+
+INSERT INTO `invites` (`id`, `user_id`, `training_id`, `status`, `date`) VALUES
+(4, 3, 4, 1, '2017-12-10 23:59:25'),
+(5, 3, 3, 1, '2017-12-11 00:48:26'),
+(6, 3, 7, 1, '2017-12-11 00:59:29'),
+(7, 3, 2, 1, '2017-12-11 01:00:08');
 
 -- --------------------------------------------------------
 
@@ -374,6 +402,12 @@ ALTER TABLE `entries`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `invites`
+--
+ALTER TABLE `invites`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `lections`
 --
 ALTER TABLE `lections`
@@ -439,7 +473,12 @@ ALTER TABLE `books`
 -- AUTO_INCREMENT для таблицы `entries`
 --
 ALTER TABLE `entries`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT для таблицы `invites`
+--
+ALTER TABLE `invites`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT для таблицы `lections`
 --

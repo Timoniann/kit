@@ -1,0 +1,62 @@
+<table class="table">
+	<thead class="thead-dark">
+		<tr>
+			<th>#</th>
+			<th>Full name</th>
+			<th>Status</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($data['users'] as $user) { ?>
+			<tr>
+				<td>
+					<?=$user['id']?>
+				</td>
+				<td>
+					<a href="/users/view/<?=$user['id']?>"><?=$user['first_name'] . ' ' . $user['last_name']?></a>
+				</td>
+				<td>
+					<?php
+						if (isset($user['invite'])){
+							echo $user['invite']['status'] == 0 ? "Waiting" : ($user['invite']['status'] == 1 ? "Accepted" : ($user['invite']['status'] == 2 ? "Not accepted" : "Undefined status"));
+						} else echo "";
+					?>
+				</td>
+				<td>
+					<?php
+						if (isset($user['invite'])) { 
+							if($user['invite']['status'] == 0) { ?>
+								<a href='/invites/cancel/<?=$user['invite']['id']?>'>
+									<button type="button" class="btn btn-outline-warning">
+										Cancel
+									</button>
+								</a>
+							<?php } else if($user['invite']['status'] == 1) { ?>
+								<a href='/invites/cancel/<?=$user['invite']['id']?>'>
+									<button type="button" class="btn btn-outline-danger">
+										Close Access
+									</button>
+								</a>
+							<?php } else if($user['invite']['status'] == 2) { ?>
+								<a href='/invites/try_again/<?=$user['invite']['id']?>'>
+									<button type="button" class="btn btn-outline-secondary">
+										Try again
+									</button>
+								</a>
+							<?php } else echo 'Undefined status';
+						} else { ?>
+							<form action="/invites/invite" method="post">
+								<input type="hidden" name="training_id" value="<?=$data['training']['id']?>">
+								<input type="hidden" name="user_id" value="<?=$user['id']?>">
+								<button type="submit" class="btn btn-outline-success">
+							 		Invite
+							 	</button>
+							</form>
+					<?php } ?>
+				</td>
+			</tr>
+		<?php } ?>
+	</tbody>
+	
+</table>

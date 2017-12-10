@@ -12,7 +12,84 @@ if (App::teacherPermission()) { ?>
 
 
 <br><br>
+<?php if(!empty($data['invites'])) { ?>
+<h3>Запрошення</h3>
+<table class="table text-center">
+	<thead class="thead-dark">
+		<tr>
+			<th>Назва курсу</th>
+			<th>Викладач</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($data['invites'] as $invite) { ?>
+			<tr>
+				<td>
+					<a href='/trainings/view/<?=$invite['training']['id'];?>'>
+						<?=$invite['training']['name']?>
+					</a>
+				</td>
+				<td>
+					<a href='/users/view/<?=$invite['training']['user_id'];?>'>
+						<?=$invite['training']['user']['first_name'];?>
+					</a>
+				</td>
+				<td>
+					<a href="/invites/accept/<?=$invite['id']?>">
+						<button type='button' class='btn btn-outline-success'>
+							Accept
+						</button>
+					</a>
+					<a href="/invites/reject/<?=$invite['id']?>">
+						<button type='button' class='btn btn-outline-danger'>
+							Reject
+						</button>
+					</a>
+				</td>
+			</tr>	
+		<?php } ?>
+	</tbody>
+</table>
+<?php } ?>
 
+<?php if(!empty($data['accepted_trainings'])) { ?>
+<h3>Прийняті  запрошення</h3>
+<table class="table text-center">
+	<thead class="thead-dark">
+		<tr>
+			<th>Назва курсу</th>
+			<th>Викладач</th>
+			<th> </th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($data['accepted_trainings'] as $training) { ?>
+			<tr>
+				<td>
+					<a href='/trainings/view/<?=$training['id'];?>'>
+						<?=$training['name']?>
+					</a>
+				</td>
+				<td>
+					<a href='/users/view/<?=$training['user_id'];?>'>
+						<?=$training['user']['first_name'];?>
+					</a>
+				</td>
+				<td>
+					<a href='/trainings/study/<?=$training['id'];?>'>
+						<button type='button' class='btn btn-outline-success'>
+							Продовжити навчання
+						</button>
+					</a>
+				</td>
+			</tr>	
+		<?php } ?>
+	</tbody>
+</table>
+<?php } ?>
+
+<h3>Публічні курси</h3>
 <table class="table text-center">
 	<thead class="thead-dark">
 		<tr>

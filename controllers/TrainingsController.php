@@ -17,7 +17,7 @@ class TrainingsController extends Controller
 		$subject_table = new Subjects();
 		$users_table = new Users();
 
-		$trainings = $this->table->getAll();
+		$trainings = $this->table->get(array('private' => 0));
 
 		for ($i=0; $i < count($trainings); $i++) { 
 
@@ -31,7 +31,30 @@ class TrainingsController extends Controller
 			$trainings[$i]['in_progress'] = count($entry) ? true : false;
 
 		}
+
+		$invites_table = new Invites();
+		$user = Session::getCurrentUser();
+		$invites = $invites_table->get(array('user_id' => $user['id'], 'status' => 0));
+
+		for ($i=0; $i < count($invites); $i++) { 
+			$invites[$i]['training'] = $this->table->get(array('id' => $invites[$i]['training_id']))[0];
+			$invites[$i]['training']['user'] = $users_table->get(array('id' => $invites[$i]['training']['user_id']))[0];
+		}
+
+		$entries = $entries_table->get(array('user_id' => $user['id']));
+		$accepted_trainings = array();
+		for ($i=0; $i < count($entries); $i++) { 
+			$tr = $this->table->get(array('id' => $entries[$i]['training_id'], 'private' => 1));
+			if(count($tr)){
+				$tr = $tr[0];
+				$tr['user'] = $users_table->get(array('id' => $tr['user_id']))[0];
+				array_push($accepted_trainings, $tr);
+			}
+		}
+
+		$this->data['invites'] = $invites;
 		$this->data["trainings"] = $trainings;
+		$this->data['accepted_trainings'] = $accepted_trainings;
 	}
 
 	public function create()
@@ -284,6 +307,36 @@ class TrainingsController extends Controller
 			}
 		}
 		Router::redirectToBack();
+	}
+
+	public function invite()
+	{
+		$user = Session::getCurrentUser();
+		if (!$user || !$this->params) Router::redirectToBack();
+
+		$training = $this->table->get(array('id' => $this->params[0]));
+		if(!count($training))
+			Router::redirect('/trainings');
+
+		$training = $training[0];
+		
+		$users_table = new Users();
+		$users = $users_table->get();
+
+		$invites_table = new Invites();
+		$invites = $invites_table->get(array('training_id' => $training['id']));
+		foreach ($invites as $invite) {
+			for ($i=0; $i < count($users); $i++) { 
+				if ($users[$i]['id'] == $invite['user_id']) {
+					#$users[$i]['status'] = $invite['status'];
+					$users[$i]['invite'] = $invite;
+				}
+			}
+		}
+
+		$this->data['training'] = $training;
+		$this->data['invites'] = $invites;
+		$this->data['users'] = $users;
 	}
 }
 
