@@ -35,7 +35,10 @@
 					  		<?php
 					  		$count_tries = 1;
 							foreach ($test['testings'] as $testing) { ?>
-								<a href='/testings/view/<?=$testing['id']?>'>Спроба <?=$count_tries++;?>.</a> Правильних відповідей: <?=$testing['answered_count']?>
+								<!-- <a href='/testings/view/<?=$testing['id']?>'> -->
+									Спроба <?=$count_tries++;?>.
+								<!-- </a>  -->
+								Правильних відповідей: <?=$testing['answered_count']?>
 								з <?=$testing['questions_count']?><br>
 							<?php } $count_tries = 0; ?>
 						</div>

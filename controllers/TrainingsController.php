@@ -44,7 +44,7 @@ class TrainingsController extends Controller
 		$entries = $entries_table->get(array('user_id' => $user['id']));
 		$accepted_trainings = array();
 		for ($i=0; $i < count($entries); $i++) { 
-			$tr = $this->table->get(array('id' => $entries[$i]['training_id'], 'private' => 1));
+			$tr = $this->table->get(array('id' => $entries[$i]['training_id']));//, 'private' => 1
 			if(count($tr)){
 				$tr = $tr[0];
 				$tr['user'] = $users_table->get(array('id' => $tr['user_id']))[0];
@@ -231,12 +231,23 @@ class TrainingsController extends Controller
 			$questions = $questions_table->get(array('test_id' => $tests[$i]['id']));
 
 			for ($j=0; $j < count($questions); $j++) { 
-			 	$questions[$j]['variants'] = array(
+			 	$questions[$j]['variants'] = array();
+			 	$allQuestions = array(
 			 		$questions[$j]['answer'], 
 			 		$questions[$j]['variant1'],
 			 		$questions[$j]['variant2'],
 			 		$questions[$j]['variant3']
 			 	);
+			 	$r = rand(0, 3);
+			 	array_push($questions[$j]['variants'], $allQuestions[$r]);
+			 	array_splice($allQuestions, $r, 1);
+			 	$r = rand(0, 2);
+			 	array_push($questions[$j]['variants'], $allQuestions[$r]);
+			 	array_splice($allQuestions, $r, 1);
+			 	$r = rand(0, 1);
+			 	array_push($questions[$j]['variants'], $allQuestions[$r]);
+			 	array_splice($allQuestions, $r, 1);
+			 	array_push($questions[$j]['variants'], $allQuestions[0]);
 			}
 			$tests[$i]['questions'] = $questions;
 		}
