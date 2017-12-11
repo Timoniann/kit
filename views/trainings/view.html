@@ -6,6 +6,11 @@ if (App::adminPermission() || (App::teacherPermission() && ($data['training']['u
             Редагувати тренінг
         </button>
     </a>
+    <a href="/trainings/invite/<?=$data['training']['id']?>" class="float-right">
+        <button type="button" class="btn btn-outline-primary">
+            Invite users
+        </button>
+    </a>
 
 <?php } ?>
 

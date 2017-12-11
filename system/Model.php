@@ -21,7 +21,7 @@ class Model
 		return $this->db->query($sql);
 	}
 
-	public function get($array)
+	public function get($array = array())
 	{
 		$where = "";
 		if (count($array)) {
