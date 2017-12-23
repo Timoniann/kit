@@ -139,33 +139,36 @@ margin-bottom: :20px;
   color : white;
   background-color: #428bca;
   padding : 5px 15px;
-}
+} 
+ 
+ 
 
+/* For vertical tabs */ 
 
+.tab-left.active{ 
 
-/* For vertival tabs */
-
-.tab-left.active{
-  border-bottom-color: rgb(221, 221, 221)!important;
-  border-right-color: rgb(255, 255, 255)!important;
-}
-.nav.nav-tabs-left {
-  float: left;
-  display: block;
-  margin-right: 20px;
-  border-bottom:0;
-  /*border-right: 1px solid #ddd;*/
+  border-bottom-color: rgb(221, 221, 221)!important; 
+  
+  border-right-color: rgb(255, 255, 255)!important; 
+  
+} 
+.nav.nav-tabs-left { 
+  float: left; 
+  display: block; 
+  margin-right: 20px; 
+  border-bottom:0; 
   padding-right: 15px;
-}
-/* newscontent */
+} 
+ 
+ 
 .newscontent{
-  margin: 20px;
+   margin: 20px;
 }
 .newsform{
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+   border-radius: 5px;
+   padding: 20px;
+   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
 .newsdate{
-  font-size: 14px;
+   font-size: 14px;
 }
