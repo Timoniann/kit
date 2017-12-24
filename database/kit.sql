@@ -1,30 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 4.6.4
--- https://www.phpmyadmin.net/
---
--- Хост: 127.0.0.1
--- Время создания: Дек 11 2017 г., 20:59
--- Версия сервера: 5.7.14
--- Версия PHP: 5.6.25
-
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- База данных: `kit`
---
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `answers`
---
 
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
@@ -34,18 +9,8 @@ CREATE TABLE `answers` (
   `answered` int(2) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Дамп данных таблицы `answers`
---
-
-INSERT INTO `answers` (`id`, `testing_id`, `question_id`, `user_answer`, `answered`) VALUES
-(1, 1, 1, 'Правильна відповідь', 1);
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `books`
---
+INSERT INTO `answers` (`id`, `testing_id`, `question_id`, `user_answer`, `answered`) 
+VALUES (1, 1, 1, 'Правильна відповідь', 1);
 
 CREATE TABLE `books` (
   `id` int(11) NOT NULL,
@@ -58,11 +23,6 @@ CREATE TABLE `books` (
   `subject_id` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `entries`
---
 
 CREATE TABLE `entries` (
   `id` int(11) NOT NULL,
@@ -72,18 +32,10 @@ CREATE TABLE `entries` (
   `progress` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Записи на тренінги';
 
---
--- Дамп данных таблицы `entries`
---
 
-INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) VALUES
-(1, 1, 1, '2017-12-11 16:54:10', 0);
+INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) 
+VALUES (1, 1, 1, '2017-12-11 16:54:10', 0);
 
--- --------------------------------------------------------
-
---
--- Структура таблицы `invites`
---
 
 CREATE TABLE `invites` (
   `id` int(11) NOT NULL,
@@ -93,18 +45,8 @@ CREATE TABLE `invites` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '0 - waining, 1 - accepted, 2 - not accepted'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
---
--- Дамп данных таблицы `invites`
---
-
-INSERT INTO `invites` (`id`, `user_id`, `training_id`, `status`, `date`) VALUES
-(1, 1, 1, 1, '2017-12-11 16:53:54');
-
--- --------------------------------------------------------
-
---
--- Структура таблицы `lections`
---
+INSERT INTO `invites` (`id`, `user_id`, `training_id`, `status`, `date`) 
+VALUES (1, 1, 1, 1, '2017-12-11 16:53:54');
 
 CREATE TABLE `lections` (
   `id` int(11) NOT NULL,
