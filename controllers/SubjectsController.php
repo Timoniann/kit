@@ -43,7 +43,15 @@ class SubjectsController extends Controller
 			$id = (int)$this->params[0];
 			$subject = $this->subject_table->getById($id);
 			if (count($subject)) {
-				$this->data = $subject[0];
+				$this->data['subject'] = $subject[0];
+
+				$trainings_table = new Trainings();
+				$books_table = new Books();
+
+				$this->data['trainings'] = $trainings_table->get(array('subject_id' => $subject[0]['id']));//, 'private' => 0
+				$this->data['books'] = $books_table->get(array('subject_id' => $subject[0]['id']));
+			} else {
+				Session::setFlash("Subject not found");
 			}
 		}
 	}
