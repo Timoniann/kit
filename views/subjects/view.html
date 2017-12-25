@@ -1,5 +1,19 @@
 <?php
 
-	echo "Subject " . $data['name'] . "<br> Description: <br><br> " . $data['description'];
+	echo "Предмет " . $data['subject']['name'] . "<br> Description: <br><br> " . $data['subject']['description'] . "<br>";
+
+	echo "<br><h3>Навчання по предмету:</h3>";
+	foreach ($data['trainings'] as $training) {
+		echo "<h4>";
+			echo "<a href='/trainings/view/" . $training['id'] . "'>" . $training['name'] . "</a>";
+		echo "</h4>";
+	}
+
+	echo "<br><h3>Книги по предмету:</h3>";
+	foreach ($data['books'] as $book) {
+		echo "<h4>";
+			echo "<a href='/books/view/" . $book['id'] . "'>" . $book['title'] . "</a>";
+		echo "</h4>";
+	}
 
 ?>
