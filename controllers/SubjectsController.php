@@ -44,6 +44,8 @@ class SubjectsController extends Controller
 			$subject = $this->subject_table->getById($id);
 			if (count($subject)) {
 				$this->data = $subject[0];
+			} else {
+				Session::setFlash("Subject not found");
 			}
 		}
 	}
