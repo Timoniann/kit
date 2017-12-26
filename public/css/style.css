@@ -1,174 +1,88 @@
 .header {
-  height: 50px;
+    height: 50px;
 }
 
 .main {
-  margin-top: 50px;
+    margin-top: 50px;
 }
 
-.news {
-  margin: 5px;
-  background-color: rgba(73, 73, 73, 0.46);
-  border-radius: 5px;
-}
-.ntitle{
-  margin: 10px;
-}
 .ntext{
     margin: 15px;
 }
-.nbutton{
-  margin: 15px;
-  padding-bottom: 10px;
-}
-.paginator{
-  margin: 50px;
-}
 
-/*  library  */
-.books{
-  margin: 5px;
-  background-color: rgba(73, 73, 73, 0.46);
-  border-radius: 5px;
-}
-.btitle{
-  margin: 10px;
-}
-.btext{
-    margin: 15px;
-}
-.menulib{
-  margin-top: 50px;
-}
-.searchbooks{
-  margin-top: 10px;
+.paginator{
+    margin: 50px;
 }
 
 /*  loginpage */
 .loginform{
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
+
 .regform{
-  margin-left: 100px;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    margin-left: 100px;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
 
 .shadowbox{
-  background-color: #eee;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+    background-color: #eee;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
 }
 
 .shadowbox.white{
-  background-color: #fff;
+    background-color: #fff;
 }
 
 .full{
-  width: 100%;
-}
-
-/* testingroom */
-.menutest{
-margin-top:20px;
-margin-bottom: :20px;
-}
-.checktest{
-  margin-left: 20px;
-}
-.testingroom{
-  margin-top: 20px;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-}
-/* lections */
-.lection{
-  margin-top: 20px;
-  border-radius: 5px;
-  padding: 20px;
-  box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-}
-
-/* profile */
-.tableprofile{
-  
+    width: 100%;
 }
 
 .footer{
-  /*position: absolute;*/
-  bottom: 0;
-  margin-top: 25px;
-  width: 100%;
-  height: 60px;
-  line-height: 60px;
-  background-color: #f5f5f5;
+    bottom: 0;
+    margin-top: 25px;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #f5f5f5;
 }
 
- /*Tabs*/
+/* For vertival tabs */
 
-#exTab1 .tab-content {
-  color : white;
-  background-color: #428bca;
-  padding : 5px 15px;
+.tab-left.active {
+    border-bottom-color: rgb(221, 221, 221)!important;
+    border-right-color: rgb(255, 255, 255)!important;
 }
 
-#exTab2 h3 {
-  color : white;
-  background-color: #428bca;
-  padding : 5px 15px;
+.nav.nav-tabs-left {
+    float: left;
+    display: block;
+    margin-right: 20px;
+    border-bottom:0;
+    /*border-right: 1px solid #ddd;*/
+    padding-right: 15px;
 }
 
-/* remove border radius for the tab */
-
-#exTab1 .nav-pills > li > a {
-  border-radius: 0;
+/* newscontent */
+.newscontent {
+    margin: 20px;
 }
 
-/* change border radius for the tab , apply corners on top*/
-
-#exTab3 .nav-pills > li > a {
-  border-radius: 4px 4px 0 0 ;
+.newsform {
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
+}
+.newsdate {
+    font-size: 14px;
 }
 
-#exTab3 .tab-content {
-  color : white;
-  background-color: #428bca;
-  padding : 5px 15px;
-} 
- 
- 
-
-/* For vertical tabs */ 
-
-.tab-left.active{ 
-
-  border-bottom-color: rgb(221, 221, 221)!important; 
-  
-  border-right-color: rgb(255, 255, 255)!important; 
-  
-} 
-.nav.nav-tabs-left { 
-  float: left; 
-  display: block; 
-  margin-right: 20px; 
-  border-bottom:0; 
-  padding-right: 15px;
-} 
- 
- 
-.newscontent{
-   margin: 20px;
-}
-.newsform{
-   border-radius: 5px;
-   padding: 20px;
-   box-shadow: 0 0 10px 5px rgba(221, 221, 221, 1);
-}
-.newsdate{
-   font-size: 14px;
+.nbutton{
+    margin: 15px;
+    padding-bottom: 10px;
 }
