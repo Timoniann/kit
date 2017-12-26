@@ -26,10 +26,6 @@
 
 			<div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
-						<a class="nav-link" href="/">Home</a>
-					</li>
-
 					<?php
 						$user = Session::getCurrentUser();
 						if($user){
