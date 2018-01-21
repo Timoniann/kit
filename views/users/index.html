@@ -41,7 +41,27 @@
 					<?=$user['workplace'];?>
 				</td>
 				<td>
-					<?=$user['access'] == 0 ? "Normal user" : ($user['access'] == 1 ? "Teacher" : ($user['access'] == 2 ? "Admin" : "SuperAdmin"));?>
+					<?php
+						if (App::adminPermission() && $user['access'] < 2) {
+							?>
+								<form action="/users/edit" method="post">
+									<input type="hidden" name="user_id" value="<?=$user['id'];?>">
+									<select name="user_access" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+										<option class="bg-orange" value="0" <?=$user['access'] == 0 ? "selected" : "";?>>Normal user</option>
+										<option class="bg-green" value="1" <?=$user['access'] == 1 ? "selected" : "";?>>Teacher</option>
+										<option class="bg-red" value="2">Admin</option>
+									</select>
+									<button type="submit" class="btn btn-primary">Change</button>
+								</form>
+
+							<?php
+						} else {
+							echo $user['access'] == 0 ? "Normal user" : 
+								($user['access'] == 1 ? "Teacher" : 
+								($user['access'] == 2 ? "Admin" : 
+														"SuperAdmin"));
+						}
+					?>
 				</td>
 			</tr>
 

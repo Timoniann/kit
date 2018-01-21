@@ -153,14 +153,24 @@ class TrainingsController extends Controller
 							Session::setFlash("Training type is not updated");
 					}
 
+					if (isset($_POST['next_training'])) {
+						$next_training = (int) $_POST['next_training'];
+						if($this->table->update($id, array('next_training' => $next_training)))
+							Session::setFlash("Next training changed");
+						else
+							Session::setFlash("Next training not changed");
+					}
 
 					$trainings = $this->table->getById($id);
 				}
+
 				$this->data['training'] = $trainings[0];
 				$users_table = new Users();
 				$user = $users_table->getbyId($trainings[0]['user_id']);
 				$this->data['user'] = $user[0];
 				$this->data['user'];
+
+				$this->data['own_trainings'] = $this->table->get(array('user_id' => $user[0]['id']));
 
 				$lection_table = new Lections();
 				$this->data['lections'] = $lection_table->getByTrainingId($id);

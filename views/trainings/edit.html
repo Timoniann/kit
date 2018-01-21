@@ -1,3 +1,9 @@
+<a href="/trainings/view/<?=$data['training']['id']?>" class="float-right">
+    <button type="button" class="btn btn-outline-primary">
+        View training
+    </button>
+</a>
+
 <legend>Editing treaning</legend>
 
 <form method="post" action="">
@@ -15,7 +21,7 @@
 <form method="post" action="">
     <div class="form-check form-group">
 
-        <label for="trainingtype">Training type:</label>
+        <label for="trainingtype">Training type</label>
         <br>
 
         <label class="custom-control custom-radio">
@@ -34,6 +40,29 @@
         <span class="btn">
             <button type="submit" class="btn btn-primary">Change</button><br>
         </span>
+    </div>
+</form>
+
+<form method="post" action="">
+    <div class="form-group">
+
+        <label class="mr-sm-2">Next training</label>
+        <br>
+        <select name="next_training" class="custom-select mb-2 mr-sm-2 mb-sm-0">
+            <option value="NULL">Without next training</option>
+            <?php
+                foreach ($data["own_trainings"] as $training) {
+                    if ($training['id'] != $data['training']['id']) {
+                        echo "<option value='" . $training['id'] . "' " . ((isset($data['training']['next_training']) && ($training['id'] == $data['training']['next_training'])) ? "selected" : "") . " >" . $training['name'] . "</option>";
+                    }
+                }
+            ?>
+        </select>
+        
+        <span class="btn">
+            <button type="submit" class="btn btn-primary">Change</button><br>
+        </span>
+
     </div>
 </form>
 

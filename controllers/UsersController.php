@@ -89,7 +89,17 @@ class UsersController extends Controller
 
 	public function edit()
 	{
-		
+		if (!empty($_POST) && App::adminPermission()) {
+			//$user = getCurrentUser();
+			$user_id = $_POST['user_id'];
+			$user_access = $_POST['user_access'];
+
+			if($this->table->update($user_id, array('access' => $user_access)))
+				Session::setFlash("Success updated");
+			else
+				Session::setFlash("Not updated");
+		}
+		Router::redirectToBack();
 	}
 
 }

@@ -1,3 +1,13 @@
+<?php if (App::adminPermission()) { ?>
+
+    <a href="/news/create" class="float-right">
+		<button type="button" class="btn btn-outline-primary">
+			Створити новину
+		</button>
+	</a>
+
+<?php } ?>
+
 <h2> Новини </h2><br>
 
 <h3>Пошук новин</h3>
@@ -11,20 +21,9 @@
 		</span>
 	</div>
 </form>
-<br>
-
-
-<?php if (App::adminPermission()) { ?>
-
-    <a href="/news/create" class="float-right">
-		<button type="button" class="btn btn-outline-primary">
-			Створити новину
-		</button>
-	</a>
-
-<?php } ?>
 
 <br><br>
+
 <div class="row">
 
 
