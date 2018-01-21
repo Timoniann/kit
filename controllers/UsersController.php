@@ -70,7 +70,7 @@ class UsersController extends Controller
 			Router::redirectToBack();
 			return;
 		}
-		Session::set("user_id", "" + $user[0]['id']);
+		Session::set("user_id", $user[0]['id']);
 		Router::redirect('/users/index');
 	}
 
@@ -83,15 +83,51 @@ class UsersController extends Controller
 	public function view()
 	{
 		if (count($this->params)) {
-    		$this->data['user'] = $this->table->getById((int)$this->params[0])[0];
+		    $currentUser = Session::getCurrentUser();
+		    $user = $this->table->getById((int)$this->params[0])[0];
+    		$this->data['user'] = $user;
+    		$this->data['user']['access_role'] = $this->getRoleType($user['access']);
+            $this->data['canChangeRole'] = App::superAdminPermission() && $currentUser['id'] !== $user['id'];
+            $this->data['roles'] = [0 => "Normal user", 1 => "Teacher", 2 => "Admin"];
     	}
 	}
 
 	public function edit()
 	{
-		
+
 	}
 
+	public function setRole()
+    {
+        if(!App::superAdminPermission()) {
+            Session::setFlash("403", 'danger');
+            return false;
+        }
+        if(empty($_POST) || empty($this->params)) {
+            Session::setFlash("422", 'danger');
+            return false;
+        }
+
+        $userId = $this->params[0];
+        $role = $_POST['role'];
+        $userToUpdate = new Users();
+        if($userToUpdate->setRole($userId, $role)) Session::setFlash("Role was changed");
+        Router::redirect($_SERVER['HTTP_REFERER']);
+    }
+
+	private function getRoleType($access = null)
+    {
+	    switch($access) {
+            case 0:
+                return "Normal user";
+            case 1:
+                return "Teacher";
+            case 2:
+                return "Admin";
+            default:
+                return null;
+        }
+    }
 }
 
 ?>
