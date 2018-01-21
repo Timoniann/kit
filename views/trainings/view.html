@@ -8,7 +8,7 @@ if (App::adminPermission() || (App::teacherPermission() && ($data['training']['u
     </a>
     <a href="/trainings/invite/<?=$data['training']['id']?>" class="float-right">
         <button type="button" class="btn btn-outline-primary">
-            Invite users
+            Запросити користувачів
         </button>
     </a>
 
@@ -16,29 +16,29 @@ if (App::adminPermission() || (App::teacherPermission() && ($data['training']['u
 
     <a href="/trainings/study/<?=$data['training']['id']?>" class="float-right">
         <button type="button" class="btn btn-outline-primary">
-            Learn
+            Вчити
         </button>
     </a>
 
-Training name: 
+Назва навчання: 
 	<h2>
 		<?=$data['training']['name'];?>
 	</h2>
-Access: 
+Доступ: 
 	<h3>
 		<?=$data['training']['private'] ? "Private" : "Public";?>
 	</h3>
-Author: 
+Автор: 
 	<h4> 
 		<a href='/users/view/<?=$data['user']['id'];?>'>
 			<?=$data['user']['first_name'] . " " . $data['user']['last_name'];?>
 		</a>
 	</h4>
-Lections count:<br>
+Кількість лекцій:<br>
     <h3>
         <?=$data['lections_count'];?>
     </h3>
-Tests count: 
+Кількість тестів: 
     <h3>
         <?=$data['tests_count'];?>
     </h3>
@@ -48,10 +48,10 @@ if (isset($data['testings'])) { ?>
 	<table class="table text-center">
 		<thead class="thead-dark">
 			<tr>
-				<th>User</th>
-				<th>Testing</th>
-				<th>Answered</th>
-				<th>Date</th>
+				<th>Користувач</th>
+				<th>Тестування</th>
+				<th>Відношення відповідей</th>
+				<th>Дата</th>
 			</tr>
 		</thead>
 		<thead>

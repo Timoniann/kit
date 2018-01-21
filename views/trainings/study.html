@@ -55,7 +55,7 @@
 						foreach ($test['questions'] as $question) { ?>
 							<div class="test shadowbox white" >
 								<div class="form-check form-group">
-									<h4> Question: <?=$question['question']?></h4>
+									<h4> Питання: <?=$question['question']?></h4>
 
 										<?php foreach ($question['variants'] as $variant) { ?>
 											<label class="custom-control custom-radio">
@@ -70,7 +70,7 @@
 					<?php } if (isset($test['questions']) && count($test['questions']) && !$test['testings']) { ?>
 					<a href="/trainings/create" class="float-right">
 						<button type="submit" class="btn btn-outline-primary">
-							Check out
+							Перевірити
 						</button>
 					</a>
 					<?php } ?>
@@ -82,12 +82,12 @@
 
 		<div role="tabpanel" class="tab-pane fade" id="finish">
 			<br>
-			<h4>You finished studing this training.</h4>
+			<h4>Ви завершили вивчати дане дистанційне навчання.</h4>
 			<br>
 
 			<?php
 				if(isset($data['training']['next_training'])){ ?>
-					<a href="/invites/next/<?=$data['training']['id']?>" class="btn btn-outline-success">Go to next training</a>
+					<a href="/invites/next/<?=$data['training']['id']?>" class="btn btn-outline-success">Перейти до наступного навчання</a>
 			<?php } ?>
 		</div>
 

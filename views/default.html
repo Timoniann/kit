@@ -33,23 +33,23 @@
 							?>
 
 								<li class="nav-item <?= App::getRouter()->getController() == "news" ? "active" : "" ?>">
-									<a class="nav-link" href="/news">News</a>
+									<a class="nav-link" href="/news">Новини</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link <?= App::getRouter()->getController() == "users" ? "active" : "" ?>" href="/users">Users</a>
+									<a class="nav-link <?= App::getRouter()->getController() == "users" ? "active" : "" ?>" href="/users">Користувачі</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link <?= App::getRouter()->getController() == "books" ? "active" : "" ?>" href="/books">Library</a>
+									<a class="nav-link <?= App::getRouter()->getController() == "books" ? "active" : "" ?>" href="/books">Бібліотека</a>
 								</li>
 
 								<li class="nav-item <?= App::getRouter()->getController() == "subjects" ? "active" : "" ?>">
-									<a class="nav-link" href="/subjects">Subjects</a>
+									<a class="nav-link" href="/subjects">Предмети</a>
 								</li>
 
 								<li class="nav-item <?= App::getRouter()->getController() == "trainings" ? "active" : "" ?>">
-									<a class="nav-link" href="/trainings">Trainings</a>
+									<a class="nav-link" href="/trainings">Дистанційне навчання</a>
 								</li>
 							<?php
 
@@ -57,7 +57,7 @@
 							?>
 
 								<li class="nav-item">
-									<a class="nav-link" href="/contacts">Contacts</a>
+									<a class="nav-link" href="/contacts">Контакти</a>
 								</li>
 								
 							<?php
@@ -69,19 +69,19 @@
 						if($user){ ?>
 
 							<li class="nav-item align-right <?= App::getRouter()->getController() == "profile" ? "active" : "" ?>">
-								<a class="nav-link" href="/profile">Profile</a>
+								<a class="nav-link" href="/profile">Профіль</a>
 							</li>
 
 			
 							<li class="nav-item float-right">
-								<a class="nav-link" href="/users/logout">Logout</a>
+								<a class="nav-link" href="/users/logout">Вийти</a>
 							</li>
 
 						<?php }
 						else { ?>
 
 							<li class="nav-item">
-								<a class="nav-link" href="/users/auth">Log in</a>
+								<a class="nav-link" href="/users/auth">Ввійти</a>
 							</li>
 
 						<?php }

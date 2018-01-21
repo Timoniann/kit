@@ -2,12 +2,12 @@
     <div class="col-md-12">
 
         <div class="shadowbox" style="background-color: #fff">
-        	<h2>Мій профіль</h2>
         	<a href="/profile/edit" class="float-right">
 				<button type="button" class="btn btn-outline-primary">
 					Редагувати
 				</button>
 			</a>
+        	<h2>Мій профіль</h2>
 			<div class="form-group" style="width: 100%; height: 200px;">
 				<img style="padding: 10px" width="200px" height="200px" class='rounded mx-auto d-block float-left' src='<?=($data['user']['avatar']) ? "/uploads/avatars/{$data['user']['avatar']}" : "/public/images/avatar.png";?>'>
 				<h3><?=$data['user']['first_name'] . ' ' . $data['user']['last_name'];?></h3>
@@ -17,23 +17,23 @@
 			<hr>
 
 			<div class="form-group">
-				<h4>Activity</h4>
+				<h4>Активність</h4>
 				<div class="input-group">
 					<div class="panel with-nav-tabs panel-default">
 						<ul class="nav nav-tabs" role="tablist">
 
 							<li class="nav-item">
-								<a class="nav-link" href="#trainings" role="tab" data-toggle="tab">Trainings</a>
+								<a class="nav-link" href="#trainings" role="tab" data-toggle="tab">Дистанційні навчання</a>
 							</li>
 
 							<?php if (App::teacherPermission()) { ?>
 
 								<li class="nav-item">
-									<a class="nav-link" href="#books" role="tab" data-toggle="tab">Uploaded Books</a>
+									<a class="nav-link" href="#books" role="tab" data-toggle="tab">Завантажені книги</a>
 								</li>
 
 								<li class="nav-item">
-									<a class="nav-link" href="#created_trainings" role="tab" data-toggle="tab">Created Trainings</a>
+									<a class="nav-link" href="#created_trainings" role="tab" data-toggle="tab">Створенні навчання</a>
 								</li>
 
 							<?php } ?>
@@ -148,7 +148,7 @@
 			<hr>
 
 			<div class="form-group">
-				<h4>About</h4>
+				<h4>Про себе</h4>
 				<div class="input-group">
 					<?=$data['user']['about']?>
 				</div>
@@ -157,7 +157,7 @@
 			<hr>
 
 			<div class="form-group">
-				<h4>City</h4>
+				<h4>Місце проживання</h4>
 				<div class="input-group">
 					<?=$data['user']['city']?>
 				</div>
@@ -166,7 +166,7 @@
 			<hr>
 
 			<div class="form-group">
-				<h4>Workplace</h4>
+				<h4>Робота</h4>
 				<div class="input-group">
 					<?=$data['user']['workplace']?>
 				</div>
@@ -175,7 +175,7 @@
 			<hr>
 			
 			<div class="form-group">
-				<h4>Registration date</h4>
+				<h4>Дата реєстрації</h4>
 				<div class="input-group">
 					<?=$data['user']['registration_date']?>
 				</div>

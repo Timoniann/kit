@@ -2,9 +2,9 @@
 	<thead class="thead-dark">
 		<tr>
 			<th>#</th>
-			<th>Full name</th>
-			<th>Status</th>
-			<th>Action</th>
+			<th>Повне ім'я</th>
+			<th>Статус</th>
+			<th>Дія</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -19,7 +19,7 @@
 				<td>
 					<?php
 						if (isset($user['invite'])){
-							echo $user['invite']['status'] == 0 ? "Waiting" : ($user['invite']['status'] == 1 ? "Accepted" : ($user['invite']['status'] == 2 ? "Not accepted" : "Undefined status"));
+							echo $user['invite']['status'] == 0 ? "Waiting" : ($user['invite']['status'] == 1 ? "Прийнято" : ($user['invite']['status'] == 2 ? "Не прийнято" : "Невизначений статус"));
 						} else echo "";
 					?>
 				</td>
@@ -29,28 +29,28 @@
 							if($user['invite']['status'] == 0) { ?>
 								<a href='/invites/cancel/<?=$user['invite']['id']?>'>
 									<button type="button" class="btn btn-outline-warning">
-										Cancel
+										Відмінити
 									</button>
 								</a>
 							<?php } else if($user['invite']['status'] == 1) { ?>
 								<a href='/invites/close_access/<?=$user['invite']['id']?>'>
 									<button type="button" class="btn btn-outline-danger">
-										Close Access
+										Закрити доступ
 									</button>
 								</a>
 							<?php } else if($user['invite']['status'] == 2) { ?>
 								<a href='/invites/try_again/<?=$user['invite']['id']?>'>
 									<button type="button" class="btn btn-outline-secondary">
-										Try again
+										Повторити спробу
 									</button>
 								</a>
-							<?php } else echo 'Undefined status';
+							<?php } else echo 'Невизначений статус';
 						} else { ?>
 							<form action="/invites/invite" method="post">
 								<input type="hidden" name="training_id" value="<?=$data['training']['id']?>">
 								<input type="hidden" name="user_id" value="<?=$user['id']?>">
 								<button type="submit" class="btn btn-outline-success">
-							 		Invite
+							 		Запросити
 							 	</button>
 							</form>
 					<?php } ?>
