@@ -1,6 +1,5 @@
-
 <img style="padding: 10px" width="200px" height="200px" class='rounded mx-auto d-block float-left' src='<?=($data['user']['avatar']) ? "/uploads/avatars/{$data['user']['avatar']}" : "/public/images/avatar.png";?>'>
-<?php	
+<?php
 	echo "Користувач: <h2>" . $data['user']['first_name'] . " " . $data['user']['last_name'] . "</h2><br>";
 	echo "Про себе: <h5>" . $data['user']['about'] . "</h5><br>";
 	echo "Останній візит: <h5>" . $data['user']['last_visit'] . "</h5><br>";
@@ -8,4 +7,15 @@
 	echo "Робота: <h5>" . $data['user']['workplace'] . "</h5><br>";
 	echo "Дата реєстрації: <h5>" . $data['user']['registration_date'] . "</h5><br>";
 
-?>
+<?php if($data['canChangeRole']): ?>
+	<form method="post" action="/users/setRole/<?= $data['user']['id'] ?>">
+		<label for="role">Role</label>
+		<select id="role" name="role">
+			<?php foreach($data['roles'] as $k => $v):
+			      $selected = (int)$data['user']['access'] === $k ? "selected" : ""; ?>
+				<option value="<?= $k ?>" <?= $selected ?>><?= $v ?></option>
+			<?php endforeach; ?>
+		</select>
+		<button type="submit">Change role</button>
+	</form>
+<?php endif; ?>

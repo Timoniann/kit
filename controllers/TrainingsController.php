@@ -130,7 +130,8 @@ class TrainingsController extends Controller
 			
 			if (count($trainings)) {
 				$trainings = $this->table->getById($id);
-				if (!App::adminPermission() && (Session::getCurrentUser()  != $trainings['0']['user_id'])){
+				$currentUser = Session::getCurrentUser();
+				if ((!App::adminPermission() || !App::teacherPermission()) && ($currentUser['id'] != $trainings['0']['user_id'])){
 					Session::setFlash("YOU CANT HACK ME)))", "danger");
 					Router::redirect("/trainings");
 				}

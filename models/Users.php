@@ -19,6 +19,10 @@ class Users extends Model
 		return $this->db->query($sql);
 	}
 
+	public function setRole($userId = null, $access = null) {
+        $sql = "UPDATE $this->table_name SET access = '$access' WHERE id='$userId'";
+        return $this->db->query($sql);
+    }
 }
 
 ?>
