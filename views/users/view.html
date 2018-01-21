@@ -7,15 +7,15 @@
 	echo "Робота: <h5>" . $data['user']['workplace'] . "</h5><br>";
 	echo "Дата реєстрації: <h5>" . $data['user']['registration_date'] . "</h5><br>";
 
-<?php if($data['canChangeRole']): ?>
+if($data['canChangeRole']): ?>
 	<form method="post" action="/users/setRole/<?= $data['user']['id'] ?>">
-		<label for="role">Role</label>
+		<label for="role">Роль</label>
 		<select id="role" name="role">
 			<?php foreach($data['roles'] as $k => $v):
 			      $selected = (int)$data['user']['access'] === $k ? "selected" : ""; ?>
 				<option value="<?= $k ?>" <?= $selected ?>><?= $v ?></option>
 			<?php endforeach; ?>
 		</select>
-		<button type="submit">Change role</button>
+		<button type="submit">Змінити роль</button>
 	</form>
 <?php endif; ?>

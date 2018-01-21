@@ -1,17 +1,17 @@
 <div class="col-md-12">
 	<div class="panel with-nav-tabs panel-default">
-		<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav-tabs" role="tablist"> <!-- + class nav -->
 		<?php 
 			$count = 0;
 			foreach ($data['lections'] as $lection) { ?>
-			<li class="nav-item">
+			<li class="nav-item" style="display: block">
 				<a class="nav-link" href="#lection<?=$count++;?>" role="tab" data-toggle="tab"><?=$lection['title'];?></a>
 			</li>
 		<?php } $count = 0; ?>
 		<?php 
 			foreach ($data['tests'] as $test) { ?>
 			<li class="nav-item">
-				<a class="nav-link" href="#test<?=$count++;?>" role="tab" data-toggle="tab"><?=$test['title'];?></a>
+				<a class="nav-link" href="#test<?=$count++;?>" role="tab" data-toggle="tab">Тест: <?=$test['title'];?></a>
 			</li>
 			<?php } $count = 0; ?>
 

@@ -30,8 +30,7 @@ class Database
 		if (!$this->connection) return false;
 		
 		$result = $this->connection->query($sql);
-		//echo $this->error() . "$sql";
-		if ($this->error()) throw new Exception($this->connection);
+		if ($this->error()) throw new Exception($this->error());
 		if (is_bool($result)) return $result;
 
 		$data = array();
@@ -42,7 +41,7 @@ class Database
 
 	public function escape($str)
 	{
-		return mysqli_escape_string($this->connection, $str);
+		return mysqli_real_escape_string($this->connection, $str);
 	}
 
 	public function error()
