@@ -70,7 +70,7 @@ class UsersController extends Controller
 			Router::redirectToBack();
 			return;
 		}
-		Session::set("user_id", "" + $user[0]['id']);
+		Session::set("user_id", $user[0]['id']);
 		Router::redirect('/users/index');
 	}
 
