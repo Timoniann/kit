@@ -12,7 +12,7 @@ class View
 			$template_name = $router->getMethodPrefix().$router->getAction().".html";
 			$path = VIEWS . "/{$controller_dir}/{$template_name}";
 		}
-
+		$path = strtolower($path);
 		if (!file_exists($path)) {
 			// Redirect to 404 here
 			throw new Exception("Template file not found in this path: " . $path);

@@ -75,7 +75,7 @@ class Model
 		if (count($array)) {
 			foreach ($array as $key => $value) {
 				$value = $this->db->escape($value);
-				$setts .= " $key='$value', ";
+				$setts .= " `$key`='$value', ";
 			}
 			$setts = substr($setts, 0, -2);
 		} else return;

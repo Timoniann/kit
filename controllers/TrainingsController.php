@@ -92,7 +92,7 @@ class TrainingsController extends Controller
 
 		$this->data['training'] = $trainings[0];
 		
-		$user = $users_table->getbyId($trainings[0]['user_id']);
+		$user = $users_table->getById($trainings[0]['user_id']);
 		$this->data['user'] = $user[0];
 		$this->data['user'];
 
@@ -119,6 +119,16 @@ class TrainingsController extends Controller
 			$this->data['testings'] = $testings;
 			
 		}
+
+		$comments_table = new Comments();
+
+		$comments = $comments_table->getByTraining($this->data['training']['id']);
+
+		for ($i=0; $i < count($comments); $i++) { 
+			$comments[$i]['user'] = $users_table->getById($comments[$i]['user_id'])[0];
+		}
+
+		$this->data['comments'] = $comments;
 	}
 
 	public function edit()
@@ -359,6 +369,23 @@ class TrainingsController extends Controller
 		$this->data['training'] = $training;
 		$this->data['invites'] = $invites;
 		$this->data['users'] = $users;
+	}
+
+	public function send_comment()
+	{
+		$user = Session::getCurrentUser();
+
+		if (isset($_POST['training_id']) && isset($_POST['content'])) {
+			$training_id = $_POST['training_id'];
+			$content = $_POST['content'];
+
+			$comments_table = new Comments();
+			if($comments_table->add($user['id'], $training_id, $content)) Session::setFlash("Comment is added", "success");
+			else Session::setFlast("Comment was not added", "danger");
+		} else {
+			Session::setFlash("Need required params");
+		}
+		Router::redirectToBack();
 	}
 }
 

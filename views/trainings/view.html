@@ -44,7 +44,7 @@ if (App::adminPermission() || (App::teacherPermission() && ($data['training']['u
     </h3>
 
 <?php 
-if (isset($data['testings'])) { ?>
+if (isset($data['testings']) && count($data['testings'])) { ?>
 	<table class="table text-center">
 		<thead class="thead-dark">
 			<tr>
@@ -81,4 +81,30 @@ if (isset($data['testings'])) { ?>
 		<?php } ?>
 		</thead>
 	</table> 
+<?php } ?>
+
+<h4>Додати коментар: </h4>
+
+<form action="/trainings/send_comment" method="post">
+	<input type="hidden" name="training_id" value="<?=$data['training']['id']?>">
+	<textarea style="height: 200px" name="content"></textarea> <br>
+	<button class="btn btn-outline-primary float-right" type="submit">Відправити</button>
+</form>
+<br><br>
+
+<h4>Коментарі: </h4><br>
+
+<?php
+
+foreach ($data['comments'] as $comment) { ?>
+	<div class="shadowbox white">
+		<a href='/users/view/<?=$comment['user']['id']?>' class='btn'>
+			<img class="img-thumbnail rounded-circle" style="width: 75px; height: 75px" src="/uploads/avatars/<?=$comment['user']['avatar']?>">
+			<?=$comment['user']['first_name'] . ' ' . $comment['user']['last_name']?>
+		</a>
+		<br>
+		<div class="" style="padding-left: 100px; padding-top: 20px">
+			<?=htmlspecialchars_decode($comment['content']);?>
+		</div>
+	</div><br>
 <?php } ?>

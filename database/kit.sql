@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 21 2018 г., 17:43
+-- Время создания: Мар 22 2018 г., 17:34
 -- Версия сервера: 5.7.19
 -- Версия PHP: 5.6.31
 
@@ -60,6 +60,30 @@ CREATE TABLE IF NOT EXISTS `books` (
 -- --------------------------------------------------------
 
 --
+-- Структура таблицы `comments`
+--
+
+DROP TABLE IF EXISTS `comments`;
+CREATE TABLE IF NOT EXISTS `comments` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `content` text COLLATE utf8_unicode_ci NOT NULL,
+  `training_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `content`, `training_id`) VALUES
+(1, 1, 'This is a test content of comments', 1),
+(2, 1, '&lt;p&gt;Yea&lt;/p&gt;', 1),
+(3, 1, '&lt;p style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;Bold&amp;nbsp;&lt;/strong&gt;and &lt;em&gt;Italic&lt;/em&gt;&lt;/p&gt;', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Структура таблицы `entries`
 --
 
@@ -71,14 +95,18 @@ CREATE TABLE IF NOT EXISTS `entries` (
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `progress` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Записи на тренінги';
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT='Записи на тренінги';
 
 --
 -- Дамп данных таблицы `entries`
 --
 
 INSERT INTO `entries` (`id`, `user_id`, `training_id`, `date`, `progress`) VALUES
-(1, 1, 1, '2018-01-21 18:50:53', 0);
+(1, 1, 1, '2018-01-21 18:50:53', 0),
+(2, 1, 2, '2018-03-12 15:30:19', 0),
+(3, 3, 1, '2018-03-12 15:34:55', 0),
+(4, 3, 2, '2018-03-12 15:35:47', 0),
+(5, 3, 2, '2018-03-12 21:19:44', 0);
 
 -- --------------------------------------------------------
 
@@ -94,14 +122,18 @@ CREATE TABLE IF NOT EXISTS `invites` (
   `status` int(3) NOT NULL DEFAULT '0',
   `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '0 - waining, 1 - accepted, 2 - not accepted',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `invites`
 --
 
 INSERT INTO `invites` (`id`, `user_id`, `training_id`, `status`, `date`) VALUES
-(1, 1, 1, 1, '2018-01-21 18:50:49');
+(1, 1, 1, 1, '2018-01-21 18:50:49'),
+(2, 1, 2, 1, '2018-03-12 15:30:19'),
+(3, 3, 1, 1, '2018-03-12 15:34:43'),
+(4, 3, 2, 1, '2018-03-12 15:35:47'),
+(5, 3, 2, 1, '2018-03-12 21:19:44');
 
 -- --------------------------------------------------------
 
@@ -255,7 +287,7 @@ CREATE TABLE IF NOT EXISTS `tests` (
   `title` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
   `training_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `tests`
@@ -265,8 +297,9 @@ INSERT INTO `tests` (`id`, `title`, `training_id`) VALUES
 (1, 'Лекція 1', 1),
 (2, 'Лекція 2', 1),
 (3, 'Лекція 3', 1),
-(4, 'Лекція 4', 1),
-(5, 'Лекція 5', 1);
+(4, 'Лекція 4', 2),
+(5, 'Лекція 5', 1),
+(6, 'Test', 1);
 
 -- --------------------------------------------------------
 
@@ -313,16 +346,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `about` text COLLATE utf8_unicode_ci,
   `avatar` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
   `workplace` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `group` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Дамп данных таблицы `users`
 --
 
-INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `registration_date`, `access`, `last_visit`, `city`, `about`, `avatar`, `workplace`) VALUES
-(1, 'timoniann@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Timoniann', 'Timones', '2017-12-11 13:05:23', 3, NULL, 'Khust', NULL, NULL, NULL),
-(2, 'test@gmail.com', '5b1b68a9abf4d2cd155c81a9225fd158', 'Test', 'Test', '2018-01-21 13:21:16', 0, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `email`, `password`, `first_name`, `last_name`, `registration_date`, `access`, `last_visit`, `city`, `about`, `avatar`, `workplace`, `group`) VALUES
+(1, 'timoniann@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Timoniann', 'Timones', '2017-12-11 13:05:23', 3, NULL, 'Khust', NULL, 'php3920.tmp', NULL, 'ПІ'),
+(3, 'test@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'Test', 'Test', '2018-03-12 15:33:01', 0, NULL, NULL, NULL, NULL, NULL, NULL);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -80,6 +80,14 @@ class ProfileController extends Controller
 					Session::setFlash("City not edited");
 				}
 			}
+			if (isset($_POST['group'])) {
+				$group = $_POST['group'];
+				if ($user_table->update($current_user['id'], array('group' => $group))) {
+					Session::setFlash("Group edited", 'success');
+				} else {
+					Session::setFlash("Group not edited", 'danger');
+				}
+			}
 			if (isset($_POST['workplace'])) {
 				$workplace = $_POST['workplace'];
 				if($user_table->update($current_user["id"], array('workplace' => $workplace))){
